@@ -1,6 +1,6 @@
 import pyxel
 from Sprites.Player import Player
-from Sprites.Sprite import Sprite
+from Sprites.Map import Map
 from Sprites.Text import Text
 
 class App:
@@ -11,6 +11,7 @@ class App:
         self.cold_key = 14 # couleur transparente
         self.SPRITES = [] # liste des éléments de notre jeu à afficher
         self.TEXT = [] # liste des textes de notre jeu à afficher
+        self.MAP = Map(0, 0, 0, 0, 0, 40, 16)
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(64, 64) # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
@@ -68,9 +69,17 @@ class App:
     def update(self):
         '''update des éléments du jeu'''
         if self.isState('WAITING'):
-            # création logo EPSI & texte indicatif 
-            text = Text(pyxel.width//9, pyxel.height*2/3, "Space to Play", 7)
-            self.addText(text)
+        # texte indicatif 
+            if len(self.getText) == 0:
+                text = Text(pyxel.width//9, pyxel.height*2/3, "Space to Play", 7)
+                self.addText(text)
+        # détection de lancement de partie
+            if pyxel.btn(pyxel.KEY_SPACE):
+                self.removeText(self.getText[0])
+                # on tp le joueur
+                self.MAP.x = -235
+                self.MAP.y = -24
+                self.setState('PLAYING') # on change l'état de la partie en PLAYING
 
         elif self.isState('PLAYING'):
         # on affiche des éléments de la partie quand elle débute
@@ -104,11 +113,17 @@ class App:
             for t in self.getText:
                 t.update(self.KEYS_PRESSED)
 
+        # on update la map
+            self.MAP.update(self.KEYS_PRESSED)
+
         elif self.isState('FINISH'):
             pass
 
     def draw(self):
-        pyxel.cls(14) # background noir
+        pyxel.cls(0) # background noir
+        ''' on affiche la map'''
+        pyxel.bltm(self.MAP.draw[0], self.MAP.draw[1], self.MAP.draw[2], self.MAP.draw[3], self.MAP.draw[4], self.MAP.draw[5]*8, self.MAP.draw[6]*8, self.cold_key)
+        
         '''on parcours les sprites et les textes et on les affiche'''
         for s in self.getSprites:
             pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key)
