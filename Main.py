@@ -1,7 +1,8 @@
 import pyxel
 from Sprites.Player import Player
 from Sprites.Map import Map
-from Sprites.BLT import BLT
+from Sprites.Image import Image
+from Sprites.Jeton import Jeton
 from Sprites.Text import Text
 
 class App:
@@ -14,6 +15,9 @@ class App:
         self.TSPRITES = [] # liste des éléments de notre jeu à afficher
         self.TEXT = [] # liste des textes de notre jeu à afficher
         self.MAP = [Map(480, 192, 0, 0, 0, 40, 16)]
+        self.INTERFACE = False # si une interface est ouverte dans le jeu
+        self.TIME = ''
+        self.task = None # Tâche actuelle
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256) # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
@@ -90,12 +94,6 @@ class App:
             if jeton_x-35 <= player_x+4 <= jeton_x+35 and jeton_y-35 <= player_y+4 <= jeton_y +35: 
                 jeton = pos
         return jeton
-    
-#visualisation de la position du personnage        
-    def Position(self, posPlayer):
-        ''' détecte si le joueur est assez proche d'un jeton interaction '''
-        player_x, player_y = posPlayer.getPos()[0], posPlayer.getPos()[1]
-        return player_x, player_y
 
 # Gestion global du jeu
     def update(self):
@@ -103,7 +101,7 @@ class App:
         if self.isState('WAITING'):
         # texte indicatif 
             if len(self.getTsprites) == 0:
-                x = BLT(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16, 1)
+                x = Image(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16, 1)
                 self.addTsprite(x)
         # détection de lancement de partie
             if pyxel.btn(pyxel.KEY_SPACE):
@@ -119,52 +117,57 @@ class App:
             if len(self.getSprites) == 0:
                 player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8) # on crée un joueur
                 self.addSprite(player)
-                jeton_entree = BLT(0, pyxel.height//2, 0, 0, 40, 8, 8, 1) # on crée des jetons interactions
-                jeton_mydil = BLT(-518, pyxel.height//2+8, 0, 0, 40, 8, 8, 1)
+                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 1) # on crée des jetons interactions
+                jeton_mydil = Jeton(-518, pyxel.height//2+8, 0, 0, 40, 8, 8, 1)
                 self.addSprite(jeton_entree)
                 self.addSprite(jeton_mydil)
         # déplacement 
             # UP
-            if pyxel.btn(pyxel.KEY_Z) or pyxel.btn(pyxel.KEY_UP):
-                self.UP(True)
-            else:
-                self.UP(False)
-            # DOWN
-            if pyxel.btn(pyxel.KEY_S) or pyxel.btn(pyxel.KEY_DOWN):
-                self.DOWN(True)
-            else:
-                self.DOWN(False)
-            # LEFT
-            if pyxel.btn(pyxel.KEY_Q) or pyxel.btn(pyxel.KEY_LEFT):
-                self.LEFT(True)
-            else:
-                self.LEFT(False)
-            # RIGHT
-            if pyxel.btn(pyxel.KEY_D) or pyxel.btn(pyxel.KEY_RIGHT):
-                self.RIGHT(True)
-            else:
-                self.RIGHT(False)
-        #Systéme d'horloge 
-            if len(self.getText) == 0:
-                text = Text(pyxel.width//1-47,3, "Heure:8-10h", 7)
-                self.addText(text)       
+            if not self.INTERFACE:
+                if pyxel.btn(pyxel.KEY_Z):
+                    self.UP(True)
+                else:
+                    self.UP(False)
+                # DOWN
+                if pyxel.btn(pyxel.KEY_S):
+                    self.DOWN(True)
+                else:
+                    self.DOWN(False)
+                # LEFT
+                if pyxel.btn(pyxel.KEY_Q):
+                    self.LEFT(True)
+                else:
+                    self.LEFT(False)
+                # RIGHT
+                if pyxel.btn(pyxel.KEY_D):
+                    self.RIGHT(True)
+                else:
+                    self.RIGHT(False)       
         
+            # Détection interaction
+                target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:])
+                if target_jeton in self.getSprites: # si on est assez proche d'un jeton
+                    if len(self.getText)==1:
+                        self.addText(Text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7))
+                    if pyxel.btnp(pyxel.KEY_E):
+                    # on affiche l'interface du MENU
+                        x = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                        self.addTsprite(x)
+                        self.INTERFACE = True
+                else:
+                    if len(self.getText)>1:
+                        self.removeText(self.getText[-1]) # supprime le dernier text
+            else:
+                self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
+                # si on réappuye sur E on ferme le MENU
+                if pyxel.btnp(pyxel.KEY_E):
+                    self.removeTsprite(self.getTsprites[-1])
+                    self.INTERFACE = False
 
-        
-        # Détection interaction
-            target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:])
-            if target_jeton in self.getSprites: # si on est assez proche d'un jeton
-                if len(self.getText)==1:
-                    self.addText(Text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7))
-                if pyxel.btn(pyxel.KEY_E):
-                    joueur_x, joueur_y = self.Position(self.getSprites[0]) # on vient chercher la position du joueur
-                    if joueur_x and joueur_y == 124: # on compare la aposition du joueur pour savoir quelle intéraction faire
-                        if len(self.getTsprites) == 0:
-                            x = BLT(pyxel.width/2, pyxel.height, 2, 32, 200, 32, 32, 10)
-                            self.addTsprite(x)
-            else:
-                if len(self.getText)>1:
-                    self.removeText(self.getText[-1]) # supprime le dernier text
+        #Système d'horloge 
+            if len(self.getText) == 0:
+                text = Text(pyxel.width//1-47,3, self.TIME, 7)
+                self.addText(text)
 
         # on update les sprites & les textes
             for s in self.getSprites:
