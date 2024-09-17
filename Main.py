@@ -79,9 +79,7 @@ class App:
     
     def RIGHT(self, bool):
         self.KEYS_PRESSED['RIGHT'] = bool
-# déplacement sur la MAP    
-    def updateMap(self):
-        pass
+
 
 # Gestion global du jeu
     def update(self):
