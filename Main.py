@@ -11,7 +11,7 @@ class App:
         self.cold_key = 14 # couleur transparente
         self.SPRITES = [] # liste des éléments de notre jeu à afficher
         self.TEXT = [] # liste des textes de notre jeu à afficher
-        self.MAP = Map(0, 0, 0, 0, 0, 40, 16)
+        self.MAP = [Map(0, 0, 0, 0, 0, 40, 16), Map(0, 0, 0, 0, 16*8, 40, 16)]
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(64, 64) # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
@@ -78,8 +78,9 @@ class App:
             if pyxel.btn(pyxel.KEY_SPACE):
                 self.removeText(self.getText[0])
                 # on tp le joueur
-                self.MAP.x = -235
-                self.MAP.y = -24
+                for m in self.MAP:
+                    m.x = -235
+                    m.y = -24
                 self.setState('PLAYING') # on change l'état de la partie en PLAYING
 
         elif self.isState('PLAYING'):
@@ -115,7 +116,8 @@ class App:
                 t.update(self.KEYS_PRESSED)
 
         # on update la map
-            self.MAP.update(self.KEYS_PRESSED)
+            for m in self.MAP:
+                m.update(self.KEYS_PRESSED)
 
         elif self.isState('FINISH'):
             pass
