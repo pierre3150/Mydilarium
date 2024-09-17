@@ -16,7 +16,7 @@ class App:
         self.TEXT = [] # liste des textes de notre jeu à afficher
         self.MAP = [Map(480, 192, 0, 0, 0, 40, 16)]
         self.INTERFACE = False # si une interface est ouverte dans le jeu
-        self.TIME = ''
+        self.TIME = '8H 10H'
         self.task = None # Tâche actuelle
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256) # dimension de la fenêtre
