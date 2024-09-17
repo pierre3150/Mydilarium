@@ -88,7 +88,6 @@ class App:
             jeton_x, jeton_y = pos.getPos()[0], pos.getPos()[1]
             if jeton_x-35 <= player_x+4 <= jeton_x+35 and jeton_y-35 <= player_y+4 <= jeton_y +35: 
                 print('interaction')
-                pyxel.text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7) # affiche l'indication
                 return pos
             return
 
@@ -147,8 +146,11 @@ class App:
         # Détection interaction
             target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:])
             if target_jeton in self.getSprites: # si on est assez proche d'un jeton
-                pass
-            
+                if len(self.getText)==1:
+                    self.addText(Text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7))
+            else:
+                if len(self.getText)>1:
+                    self.removeText(self.getText[-1]) # supprime le dernier text
 
         # on update les sprites & les textes
             for s in self.getSprites:
