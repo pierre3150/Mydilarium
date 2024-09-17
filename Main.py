@@ -90,6 +90,11 @@ class App:
                 print('interaction')
                 return pos
             return
+#visualisation de la position du personnage        
+    def Position(self, posPlayer):
+        ''' détecte si le joueur est assez proche d'un jeton interaction '''
+        player_x, player_y = posPlayer.getPos()[0], posPlayer.getPos()[1]
+        return player_x, player_y
 
 # Gestion global du jeu
     def update(self):
@@ -148,6 +153,10 @@ class App:
             if target_jeton in self.getSprites: # si on est assez proche d'un jeton
                 if len(self.getText)==1:
                     self.addText(Text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7))
+                    if pyxel.bnt(pyxel.KEY_E):
+                        joueur_x, joueur_y = self.Position(self.getSprites[0]) # on vient chercher la position du joueur
+                        if joueur_x and joueur_y == 124: # on compare la aposition du joueur pour savoir quelle intéraction faire
+                            pass
             else:
                 if len(self.getText)>1:
                     self.removeText(self.getText[-1]) # supprime le dernier text
