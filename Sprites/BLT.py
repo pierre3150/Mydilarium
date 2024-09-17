@@ -3,7 +3,7 @@ import pyxel
 class BLT():
     ''' affiche une texture à l'endroit souhaité'''
 # constructeur
-    def __init__(self, x, y, img, x_texture, y_texture, width, height) -> None:
+    def __init__(self, x, y, img, x_texture, y_texture, width, height, scale) -> None:
         self.x = x
         self.y = y
         self.img = img
@@ -11,6 +11,7 @@ class BLT():
         self.y_texture = y_texture
         self.width = width
         self.height = height
+        self.scale = scale
         self.speed_scrolling = 3
     
     def getPos(self):
@@ -28,6 +29,6 @@ class BLT():
 
     @property
     def draw(self):
-        return self.x, self.y, self.img, self.x_texture, self.y_texture, self.width, self.height
+        return self.x, self.y, self.img, self.x_texture, self.y_texture, self.width, self.height, self.scale
     
 

@@ -103,7 +103,7 @@ class App:
         if self.isState('WAITING'):
         # texte indicatif 
             if len(self.getTsprites) == 0:
-                x = BLT(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16)
+                x = BLT(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16, 1)
                 self.addTsprite(x)
         # détection de lancement de partie
             if pyxel.btn(pyxel.KEY_SPACE):
@@ -119,8 +119,8 @@ class App:
             if len(self.getSprites) == 0:
                 player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8) # on crée un joueur
                 self.addSprite(player)
-                jeton_entree = BLT(0, pyxel.height//2, 0, 0, 40, 8, 8) # on crée des jetons interactions
-                jeton_mydil = BLT(-518, pyxel.height//2+8, 0, 0, 40, 8, 8)
+                jeton_entree = BLT(0, pyxel.height//2, 0, 0, 40, 8, 8, 1) # on crée des jetons interactions
+                jeton_mydil = BLT(-518, pyxel.height//2+8, 0, 0, 40, 8, 8, 1)
                 self.addSprite(jeton_entree)
                 self.addSprite(jeton_mydil)
         # déplacement 
@@ -160,7 +160,7 @@ class App:
                     joueur_x, joueur_y = self.Position(self.getSprites[0]) # on vient chercher la position du joueur
                     if joueur_x and joueur_y == 124: # on compare la aposition du joueur pour savoir quelle intéraction faire
                         if len(self.getTsprites) == 0:
-                            x = BLT(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16)
+                            x = BLT(pyxel.width/2, pyxel.height, 2, 32, 200, 32, 32, 10)
                             self.addTsprite(x)
             else:
                 if len(self.getText)>1:
@@ -189,7 +189,7 @@ class App:
         for s in self.getSprites:
             pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key, 0, 4)
         for ts in self.getTsprites:
-            pyxel.blt(ts.draw[0], ts.draw[1], ts.draw[2], ts.draw[3], ts.draw[4], ts.draw[5], ts.draw[6], self.cold_key, 0, 1)
+            pyxel.blt(ts.draw[0], ts.draw[1], ts.draw[2], ts.draw[3], ts.draw[4], ts.draw[5], ts.draw[6], self.cold_key, 0, ts.draw[7])
         for t in self.getText:
             pyxel.text(t.draw[0], t.draw[1], t.draw[2], t.draw[3])
 
