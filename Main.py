@@ -35,6 +35,7 @@ class App:
         pyxel.init(64, 64) # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
         pyxel.run(self.update, self.draw) # execution du jeu
+        
 
 # gestion des états de la partie
     def isState(self, state):
