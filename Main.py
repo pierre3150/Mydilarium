@@ -80,10 +80,14 @@ class App:
     def RIGHT(self, bool):
         self.KEYS_PRESSED['RIGHT'] = bool
 
-# Gestion interaction
-    def canInteract(self, posPlayer):
+# gestion interaction
+    def canInteract(self, posPlayer, posJetons:list):
         ''' détecte si le joueur est assez proche d'un jeton interaction '''
-        pass
+        for pos in posJetons:
+            player_x, player_y = posPlayer.getPos()[0], posPlayer.getPos()[1]
+            jeton_x, jeton_y = pos.getPos()[0], pos.getPos()[1]
+            if jeton_x-35 <= player_x+4 <= jeton_x+35 and jeton_y-35 <= player_y+4 <= jeton_y +35: 
+                print('interaction !')
 
 # Gestion global du jeu
     def update(self):
@@ -137,8 +141,7 @@ class App:
             self.addText(text)
         
         # Détection interaction
-
-            
+            self.canInteract(self.getSprites[0], self.getSprites[1:])
         # on update les sprites & les textes
             for s in self.getSprites:
                 s.update(self.KEYS_PRESSED)

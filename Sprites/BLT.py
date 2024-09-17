@@ -12,7 +12,10 @@ class BLT():
         self.width = width
         self.height = height
         self.speed_scrolling = 3
-        
+    
+    def getPos(self):
+        return self.x, self.y
+    
     def update(self, keys):
         if keys['UP'] and pyxel.pget(pyxel.width//2, pyxel.height//2-14)!=0:
             self.y += self.speed_scrolling

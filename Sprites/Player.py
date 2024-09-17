@@ -14,6 +14,9 @@ class Player():
         self.default_texture_x = 8
         self.default_texture_y = 8
 
+    def getPos(self):
+        return self.x, self.y
+
     def animation(self, texture_1, texture_2):
         ''' switch d'une texture à l'autre toutes les quarts secondes'''
         if (self.x_texture, self.y_texture) == texture_1:

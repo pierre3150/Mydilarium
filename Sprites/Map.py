@@ -12,6 +12,9 @@ class Map():
         self.width = width
         self.height = height
         self.speed_scrolling = 3
+
+    def getPos(self):
+        return self.x, self.y
         
     def update(self, keys):
         # on fait défiler la map quand le joueur avance
