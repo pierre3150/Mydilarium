@@ -12,23 +12,16 @@ class Map():
         self.width = width
         self.height = height
         self.speed_scrolling = 3
-
-    def is_wall(x, y):
-        tile_x = x // 8
-        tile_y = y // 8
-        tile = pyxel.tilemap(0).get(tile_x, tile_y)
-        print(tile)
-        return tile == 1  # Numéro de la tuile représentant un mur
         
     def update(self, keys):
         # on fait défiler la map quand le joueur avance
-        if keys['UP']:
+        if keys['UP'] and pyxel.pget(pyxel.width//2, pyxel.height//2-14)!=0:
             self.y += self.speed_scrolling
-        elif keys['DOWN']:
+        elif keys['DOWN'] and pyxel.pget(pyxel.width//2, pyxel.height//2+10)!=0:
             self.y -= self.speed_scrolling
-        elif keys['LEFT']:
+        elif keys['LEFT'] and pyxel.pget(pyxel.width//2-10, pyxel.height//2)!=0:
             self.x += self.speed_scrolling  
-        elif keys['RIGHT']:
+        elif keys['RIGHT'] and pyxel.pget(pyxel.width//2+14, pyxel.height//2)!=0:
             self.x -= self.speed_scrolling 
 
     @property
