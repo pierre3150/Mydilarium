@@ -137,8 +137,9 @@ class App:
             else:
                 self.RIGHT(False)
         #Systéme d'horloge 
-            text = Text(pyxel.width//1-47,3, "Heure:8-10h", 7)
-            self.addText(text)
+            if len(self.getText) == 0:
+                text = Text(pyxel.width//1-47,3, "Heure:8-10h", 7)
+                self.addText(text)       
         
         # Détection interaction
             self.canInteract(self.getSprites[0], self.getSprites[1:])
