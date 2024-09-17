@@ -11,6 +11,7 @@ class App:
         self.STATE = 'WAITING' # temporairement mis à PLAYING par défaut pour tests les fonctionnalités du jeu
         self.cold_key = 14 # couleur transparente
         self.SPRITES = [] # liste des éléments de notre jeu à afficher
+        self.TSPRITES = [] # liste des éléments de notre jeu à afficher
         self.TEXT = [] # liste des textes de notre jeu à afficher
         self.MAP = [Map(480, 192, 0, 0, 0, 40, 16)]
         self.COLLISIONS = [
@@ -45,6 +46,19 @@ class App:
     def setState(self, state):
         '''change la valeur de state'''
         self.STATE = state
+
+# Gestion des Textes Sprites
+    def addTsprite(self, sprite):
+        ''' ajouter un nouveau texte sprite à la liste des éléments à aficher '''
+        self.TSPRITES.append(sprite)
+
+    def removeTsprite(self, sprite):
+        '''supprimer un texte sprite pour ne plus l'afficher'''
+        self.TSPRITES.remove(sprite)
+    @property
+    def getTsprites(self):
+        ''' retourne la liste de tous les texte sprites à afficher'''
+        return self.TSPRITES
 
 # Gestion des Sprites
     def addSprite(self, sprite):
@@ -93,7 +107,8 @@ class App:
         '''update des éléments du jeu'''
         if self.isState('WAITING'):
         # texte indicatif 
-            BLT(pyxel.width/2, pyxel.height/2, 0, 16, 16, 207, 32)
+            x = BLT(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16)
+            self.addTsprite(x)
         # détection de lancement de partie
             if pyxel.btn(pyxel.KEY_SPACE):
                 self.removeText(self.getText[0])
@@ -151,6 +166,8 @@ class App:
         '''on parcours les sprites et les textes et on les affiche'''
         for s in self.getSprites:
             pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key, 0, 4)
+        for s in self.getTsprites:
+            pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key, 0, 1)
         for t in self.getText:
             pyxel.text(t.draw[0], t.draw[1], t.draw[2], t.draw[3])
 
