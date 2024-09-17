@@ -149,6 +149,7 @@ class App:
                 text = Text(pyxel.width//1-47,3, "Heure:8-10h", 7)
                 self.addText(text)       
         
+        
         # Détection interaction
             target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:])
             if target_jeton in self.getSprites: # si on est assez proche d'un jeton
