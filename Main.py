@@ -155,12 +155,12 @@ class App:
             if target_jeton in self.getSprites: # si on est assez proche d'un jeton
                 if len(self.getText)==1:
                     self.addText(Text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7))
-                    if pyxel.bnt(pyxel.KEY_E):
-                        joueur_x, joueur_y = self.Position(self.getSprites[0]) # on vient chercher la position du joueur
-                        if joueur_x and joueur_y == 124: # on compare la aposition du joueur pour savoir quelle intéraction faire
-                            if len(self.getTsprites) == 0:
-                                x = BLT(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16)
-                                self.addTsprite(x)
+                if pyxel.btn(pyxel.KEY_E):
+                    joueur_x, joueur_y = self.Position(self.getSprites[0]) # on vient chercher la position du joueur
+                    if joueur_x and joueur_y == 124: # on compare la aposition du joueur pour savoir quelle intéraction faire
+                        if len(self.getTsprites) == 0:
+                            x = BLT(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16)
+                            self.addTsprite(x)
             else:
                 if len(self.getText)>1:
                     self.removeText(self.getText[-1]) # supprime le dernier text
