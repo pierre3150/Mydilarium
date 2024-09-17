@@ -80,6 +80,10 @@ class App:
     def RIGHT(self, bool):
         self.KEYS_PRESSED['RIGHT'] = bool
 
+# Gestion interaction
+    def canInteract(self, posPlayer):
+        ''' détecte si le joueur est assez proche d'un jeton interaction '''
+        pass
 
 # Gestion global du jeu
     def update(self):
@@ -103,6 +107,10 @@ class App:
             if len(self.getSprites) == 0:
                 player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8) # on crée un joueur
                 self.addSprite(player)
+                jeton_entree = BLT(0, pyxel.height//2, 0, 0, 40, 8, 8) # on crée des jetons interactions
+                jeton_mydil = BLT(-518, pyxel.height//2+8, 0, 0, 40, 8, 8)
+                self.addSprite(jeton_entree)
+                self.addSprite(jeton_mydil)
         # déplacement 
             # UP
             if pyxel.btn(pyxel.KEY_Z) or pyxel.btn(pyxel.KEY_UP):
@@ -127,6 +135,9 @@ class App:
         #Systéme d'horloge 
             text = Text(pyxel.width//1-47,3, "Heure:8-10h", 7)
             self.addText(text)
+        
+        # Détection interaction
+
             
         # on update les sprites & les textes
             for s in self.getSprites:
