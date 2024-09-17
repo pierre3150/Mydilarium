@@ -1,6 +1,7 @@
 import pyxel
 from Sprites.Player import Player
 from Sprites.Map import Map
+from Sprites.BLT import BLT
 from Sprites.Text import Text
 
 class App:
@@ -92,9 +93,7 @@ class App:
         '''update des éléments du jeu'''
         if self.isState('WAITING'):
         # texte indicatif 
-            if len(self.getText) == 0:
-                text = Text(pyxel.width//9, pyxel.height*2/3, "Space to Play", 7)
-                self.addText(text)
+            BLT(pyxel.width/2, pyxel.height/2, 0, 16, 16, 207, 32)
         # détection de lancement de partie
             if pyxel.btn(pyxel.KEY_SPACE):
                 self.removeText(self.getText[0])
