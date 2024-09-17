@@ -144,6 +144,10 @@ class App:
                 self.RIGHT(True)
             else:
                 self.RIGHT(False)
+        #Systéme d'horloge 
+            text = Text(pyxel.width//1-45,3, "Heure:", 7)
+            self.addText(text)
+            
         # on update les sprites & les textes
             for s in self.getSprites:
                 s.update(self.KEYS_PRESSED)
@@ -171,4 +175,17 @@ class App:
         for t in self.getText:
             pyxel.text(t.draw[0], t.draw[1], t.draw[2], t.draw[3])
 
+
+
+
+
+
+
+
+
+
+
+    #Horloge interne 
+
+    
 App()
