@@ -11,7 +11,7 @@ class Map():
         self.y_texture = y_texture
         self.width = width
         self.height = height
-        self.speed_scrolling = 1
+        self.speed_scrolling = 3
 
     def is_wall(x, y):
         tile_x = x // 8

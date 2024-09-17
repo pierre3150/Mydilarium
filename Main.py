@@ -11,7 +11,7 @@ class App:
         self.cold_key = 14 # couleur transparente
         self.SPRITES = [] # liste des éléments de notre jeu à afficher
         self.TEXT = [] # liste des textes de notre jeu à afficher
-        self.MAP = [Map(0, 0, 0, 0, 0, 40, 16)]
+        self.MAP = [Map(480, 192, 0, 0, 0, 40, 16)]
         self.COLLISIONS = [
            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0],
            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -32,7 +32,7 @@ class App:
 
         ]
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
-        pyxel.init(64, 64) # dimension de la fenêtre
+        pyxel.init(256, 256) # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
         pyxel.run(self.update, self.draw) # execution du jeu
 
@@ -100,8 +100,8 @@ class App:
                 self.removeText(self.getText[0])
                 # on tp le joueur
                 for m in self.MAP:
-                    m.x = -235
-                    m.y = -24
+                    m.x = -470
+                    m.y = 100
                 self.setState('PLAYING') # on change l'état de la partie en PLAYING
 
         elif self.isState('PLAYING'):
@@ -147,11 +147,11 @@ class App:
         pyxel.cls(0) # background noir
         ''' on affiche la map'''
         for m in self.MAP:
-            pyxel.bltm(m.draw[0], m.draw[1], m.draw[2], m.draw[3], m.draw[4], m.draw[5]*8, m.draw[6]*8, self.cold_key)
+            pyxel.bltm(m.draw[0], m.draw[1], m.draw[2], m.draw[3], m.draw[4], m.draw[5]*8, m.draw[6]*8, self.cold_key, 0, 4)
         
         '''on parcours les sprites et les textes et on les affiche'''
         for s in self.getSprites:
-            pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key)
+            pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key, 0, 4)
         for t in self.getText:
             pyxel.text(t.draw[0], t.draw[1], t.draw[2], t.draw[3])
 
