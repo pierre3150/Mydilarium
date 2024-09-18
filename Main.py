@@ -298,6 +298,7 @@ class App:
                             self.addTsprite(bulle)
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
+                            self.TIME = '18h - Game Over'
 
                         self.INTERFACE = True
                 else:
