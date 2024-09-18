@@ -119,12 +119,12 @@ class App:
             if pyxel.btnp(pyxel.KEY_I): 
                 if self.INTERFACE==True:
                     self.removeTsprite(self.getTsprites[-1])
+                    self.removeText(self.getText[-1])
                     self.INTERFACE=False
                 else:
-                    menu = Image(95,100,0,0,168,64,64,3)
+                    menu = Image(95,110,0,0,168,64,64,3)
                     self.addTsprite(menu)
                     self.INTERFACE = True
-
 
         # détection de lancement de partie
             if pyxel.btn(pyxel.KEY_SPACE):
