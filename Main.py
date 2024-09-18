@@ -23,6 +23,7 @@ class App:
         self.TIME = '8H - Debut de la journee '
         self.task = 0 # Tâche actuelle
         self.deleteJeton = []
+        self.INVENTORY = [] # liste pour stocker les objets du MyDil récupérés
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256) # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
@@ -147,14 +148,14 @@ class App:
         # on affiche des éléments de la partie quand elle débute
             if len(self.getSprites) == 0:
                 # on crée un joueur
-                player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8) 
+                player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8, 4) 
                 self.addSprite(player)
                 # crée les objets manquant du MyDil
-                objet1 = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1], 0, 0, 48, 8, 8, '     Casque virtuel !\n\n\nRapporte le vite au MyDil', 15)
-                objet2 = Jeton(self.MAP.getPos()[0]+20, self.MAP.getPos()[1], 0, 0, 48, 8, 8, "    Carte Raspberry !\n\n\nRapporte le vite au MyDil", 16)
-                objet3 = Jeton(self.MAP.getPos()[0]+40, self.MAP.getPos()[1], 0, 0, 48, 8, 8, "         Robot !\n\n\nRapporte le vite au MyDil", 17)
-                objet4 = Jeton(self.MAP.getPos()[0]+60, self.MAP.getPos()[1], 0, 0, 48, 8, 8, "        Manette !\n\n\nRapporte le vite au MyDil", 18)
-                objet5 = Jeton(self.MAP.getPos()[0]+80, self.MAP.getPos()[1], 0, 0, 48, 8, 8, "      Imprimante 3D !\n\n\nRapporte le vite au MyDil", 19)
+                objet1 = Jeton(self.MAP.getPos()[0]*2+36, self.MAP.getPos()[1]+34, 0, 0, 48, 8, 8, 2,'     Casque virtuel !\n\n\nRapporte le vite au MyDil', 15)
+                objet2 = Jeton(self.MAP.getPos()[0]//2-40, self.MAP.getPos()[1]*3+28, 0, 0, 48, 8, 8, 2,"    Carte Raspberry !\n\n\nRapporte le vite au MyDil", 16)
+                objet3 = Jeton(self.MAP.getPos()[0]//2+24, self.MAP.getPos()[1]//3-90, 0, 0, 48, 8, 8, 2,"         Robot !\n\n\nRapporte le vite au MyDil", 17)
+                objet4 = Jeton(self.MAP.getPos()[0]//8+22, self.MAP.getPos()[1]+210, 0, 0, 48, 8, 8, 2,"        Manette !\n\n\nRapporte le vite au MyDil", 18)
+                objet5 = Jeton(self.MAP.getPos()[0]-388, self.MAP.getPos()[1]+228, 0, 0, 48, 8, 8, 2,"      Imprimante 3D !\n\n\nRapporte le vite au MyDil", 19)
                 self.addSprite(objet1)
                 self.addSprite(objet2)
                 self.addSprite(objet3)
@@ -201,7 +202,6 @@ class App:
 
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '8h15 - Se rendre au MyDil'
 
                         elif target_jeton.getNb() == 1:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -209,8 +209,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton, False)
-                            self.TIME = '8h30 - Cours de Reseau'
+                            self.CompleteTask(target_jeton, True)
 
                         elif target_jeton.getNb() == 2:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -218,7 +217,6 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))              
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '9h30 - Cours de Reseau'
 
                         elif target_jeton.getNb() == 3:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 8)
@@ -227,7 +225,6 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '10h15 - Pause flechette'
 
                         elif target_jeton.getNb() == 4:
                             bulle = Image(pyxel.width//2-8,pyxel.height*4/5, 2, 32, 200, 32, 32, 8)
@@ -236,7 +233,6 @@ class App:
                             self.addText(Text(pyxel.width//7, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '10h30 - Cours Securité Web'
                         
                         elif target_jeton.getNb() == 5:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -251,7 +247,6 @@ class App:
                             
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '11h30 - Cours Securité Web'
                         
                         elif target_jeton.getNb() == 6:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -266,7 +261,6 @@ class App:
                             
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '12h30 - Pause Dejeuner'
 
                         elif target_jeton.getNb() == 7:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -275,7 +269,6 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '13h30 - Cours Programmation'
 
                         elif target_jeton.getNb() == 8:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -284,7 +277,6 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '14h30 - Cours Programmation'
 
                         elif target_jeton.getNb() == 9:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -293,7 +285,6 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '15h15 - Pause dans le couloir'
 
                         elif target_jeton.getNb() == 10:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -302,7 +293,6 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '15h30 - Cours Marketing/Communication'
 
                         elif target_jeton.getNb() == 11:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -311,7 +301,6 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '16h30 - Cours Marketing/Communication'
                         
                         elif target_jeton.getNb() == 12:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -320,7 +309,6 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '17h30 - Remise des Diplomes'
                         
                         elif target_jeton.getNb() == 13:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -329,7 +317,6 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '18h - Sortir de l\'EPSI'
                         
                         elif target_jeton.getNb() == 14:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -338,48 +325,81 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '18h - Game Over'
+                            
 
                     # gestion objets Mydil cachés
                         elif target_jeton.getNb() == 15:
+                            print(self.task)
+                            casque = Image(pyxel.width//2, pyxel.height*1/3, 0, 32, 128, 16, 16, 6)
+                            self.addTsprite(casque)
                             pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
                             self.addTsprite(pancarte)
-                            # texte de la bulle
-                            self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                            # on complète la tâche
-                            self.CompleteTask(target_jeton, True)
-
+                            if len(self.INVENTORY) == 0:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                
+                                # on complète la tâche
+                                target_jeton.Complete()
+                            else:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
                         elif target_jeton.getNb() == 16:
+                            raspberry = Image(pyxel.width//2, pyxel.height*1/3, 0, 16, 112, 16, 16, 6)
+                            self.addTsprite(raspberry)
                             pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
                             self.addTsprite(pancarte)
-                            # texte de la bulle
-                            self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                            # on complète la tâche
-                            self.CompleteTask(target_jeton, True)
-
+                            if len(self.INVENTORY) == 0:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                # on complète la tâche
+                                target_jeton.Complete()
+                            else:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
                         elif target_jeton.getNb() == 17:
+                            robot = Image(pyxel.width//2, pyxel.height*1/3, 0, 0, 128, 16, 16, 6)
+                            self.addTsprite(robot)
                             pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
                             self.addTsprite(pancarte)
-                            # texte de la bulle
-                            self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                            # on complète la tâche
-                            self.CompleteTask(target_jeton, True)
-                        
+                            if len(self.INVENTORY) == 0:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                # on complète la tâche
+                                target_jeton.Complete()
+                            else:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
                         elif target_jeton.getNb() == 18:
+                            manette = Image(pyxel.width//2, pyxel.height*1/3, 0, 0, 112, 16, 16, 6)
+                            self.addTsprite(manette)
                             pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
                             self.addTsprite(pancarte)
-                            # texte de la bulle
-                            self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                            # on complète la tâche
-                            self.CompleteTask(target_jeton, True)
-                        
+                            if len(self.INVENTORY) == 0:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                # on complète la tâche
+                                target_jeton.Complete()
+                            else:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
                         elif target_jeton.getNb() == 19:
+                            imprimante = Image(pyxel.width//2, pyxel.height*1/3, 0, 48, 128, 16, 16, 6)
+                            self.addTsprite(imprimante)
                             pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
                             self.addTsprite(pancarte)
-                            # texte de la bulle
-                            self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                            # on complète la tâche
-                            self.CompleteTask(target_jeton, True)
+                            if len(self.INVENTORY) == 0:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                # on complète la tâche
+                                target_jeton.Complete()
+                            else:
+                                # texte de la bulle
+                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
                         
 
                         for objtext in self.getText:
@@ -399,9 +419,9 @@ class App:
                 if pyxel.btnp(pyxel.KEY_E):
                     # on supprime les textes et la bulle
                     for objtext in self.getText:
-                        if objtext.getText() in target_jeton.getText():
+                        if objtext.getText() in target_jeton.getText() or objtext.getText() in 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.':
                             self.removeText(objtext)
-                    self.removeTsprite(self.getTsprites[-1])
+                    self.getTsprites.clear() # on supprime les images du menu
                     # on supprimer le jeton après consultation si nécessaire
                     for jeton in self.deleteJeton:
                         if jeton in self.getSprites:
@@ -409,53 +429,66 @@ class App:
                     self.INTERFACE = False
 
         #gestion des jetons à afficher
-            if self.task == 0 and len(self.getSprites) == 6:
+            jeton = None
+            if self.task == 0:
                 # on crée le premier jeton à l'entrée de l'EPSI
-                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'Bienvenue à l\'EPSI ! Venez decouvrir la vie\n etudiante sur notre campus le temps d\'une\n journee.\n\n\nCommmence par rendre visite au coach Mydil\npresent au centre du campus !', 0)   
-                self.addSprite(jeton_entree)    
-            elif self.task == 1 and len(self.getSprites) == 7:
-                jeton_mydil = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 'Bienvenue au MyDil. C\'est ici que tu trouves\n\n\n tous les objets qui sont a la pointe de la\n\n\n technologie. Malheureusement on m\'a cacher tous\n\n\n c\'est objet, s\'il vous plaît aidez-moi.', 1)   
-                self.addSprite(jeton_mydil) 
-            elif self.task == 2 and len(self.getSprites) == 8:
-                jeton_reseau_cours = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 'Bienvenue dans le cours de reseau. J\'ai\n\n\n effectivement l\'un des objets que tu cherches.\n\n\n Or j\'ai d\'abord besoin de toi pour retablir le\n\n\n reseau. Relie les differents materiels pour remettre \n\n\nle reseau en place.', 2)   
-                self.addSprite(jeton_reseau_cours) 
-            elif self.task == 3 and len(self.getSprites) == 9:
-                jeton_reseau_epreuve = Jeton(self.MAP.getPos()[0]-420, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 'Bienvenue au cours de WEB. Dans ce cours, tu\n\n\n devras te reconnaitre à mon compte, or à chaque fois\n\n\n j\'oublie mon mdp. Je me souviens juste que je l\'ai\n\n\n mis dans mon code. Si tu le retouve, je te\n\n\n donne l\'objet', 3)   
-                self.addSprite(jeton_reseau_epreuve) 
-            elif self.task == 4 and len(self.getSprites) == 10:
-                jeton_pause = Jeton(self.MAP.getPos()[0]*2-157, self.MAP.getPos()[1]*2-34, 0, 0, 40, 8, 8, 'Salut et Bienvenue au cours de DEV.\n\n\n Si tu es la, c\'est que tu dois sûrement vouloir\n\n\n l\'objet. Je te le donne que si tu m\'aides pour ce\n\n\n petit programme sur lequel j\'ai du mal.', 4)   
-                self.addSprite(jeton_pause)
-            elif self.task == 5 and len(self.getSprites) == 11:
-                jeton_web_cours = Jeton(self.MAP.getPos()[0]+400, self.MAP.getPos()[1]-160, 0, 0, 40, 8, 8, 'Bien le bonjour. Assieds-toi et prends place\n\n\n pour le cours de securite web. Si tu restes assez\n\n\n assidue,tu pourras recuperer l\'objet perdu.', 5)   
-                self.addSprite(jeton_web_cours)
-            elif self.task == 6 and len(self.getSprites) == 12:
-                jeton_web_epreuve = Jeton(self.MAP.getPos()[0]+428, self.MAP.getPos()[1]-30, 0, 0, 40, 8, 8, 'Le mots de passe est perdu...\n\n\n Trouve un moyen de te connecter ;) ', 6)   
-                self.addSprite(jeton_web_epreuve)
-            elif self.task == 7 and len(self.getSprites) == 13:
-                jeton_midi = Jeton(self.MAP.getPos()[0]+332, self.MAP.getPos()[1]*2+50, 0, 0, 40, 8, 8, '**Bruit de Micro-ondes***', 7)   
-                self.addSprite(jeton_midi)
-            elif self.task == 8 and len(self.getSprites) == 14:
-                jeton_dev_cours = Jeton(self.MAP.getPos()[0]-150, self.MAP.getPos()[1]//10+100, 0, 0, 40, 8, 8, 'Assieds-toi!\n\n\n Vous etes ici dans le cours de Programmation.\n\n\n Je vous invite à prendre des notes des\n\n\n  commandes à retenir ',8)   
-                self.addSprite(jeton_dev_cours)
-            elif self.task == 9 and len(self.getSprites) == 15:
-                jeton_dev_epreuve = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]//10+172, 0, 0, 40, 8, 8, 'L\'epreuve etant simple,\n\n\n il faut faire avancer le robot\n\n\n  en trouvant le code correct :) ', 9)   
-                self.addSprite(jeton_dev_epreuve)
-            elif self.task == 10 and len(self.getSprites) == 16:
-                jeton_pause_aprem = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]-36, 0, 0, 40, 8, 8, 'Blablablablabla', 10)   
-                self.addSprite(jeton_pause_aprem)
-            elif self.task == 11 and len(self.getSprites) == 17:
-                jeton_marketing_cours = Jeton(self.MAP.getPos()[0]//2-50, self.MAP.getPos()[1]//3-30, 0, 0, 40, 8, 8, 'Bonjour,Vous etes ici en cours de Marketing.\n\n\n Nous allons voir les différents\n\n\n  types d\'entreprises.', 11)   
-                self.addSprite(jeton_marketing_cours)
-            elif self.task == 12 and len(self.getSprites) == 18:
-                jeton_marketing_epreuve = Jeton(self.MAP.getPos()[0]*2-50, self.MAP.getPos()[1]//3+10, 0, 0, 40, 8, 8, 'Voici un petit questionnaire,\n\n\n  afin de bien choisir son cursus\n\n\n  au sein de l\'etablissement.', 12)   
-                self.addSprite(jeton_marketing_epreuve)
-            elif self.task == 13 and len(self.getSprites) == 19:
-                jeton_remise_diplome = Jeton(self.MAP.getPos()[0]-360, self.MAP.getPos()[1]+200, 0, 0, 40, 8, 8, 'Prenez place, les ingénieurs informatiques.\n\n\n Vous avez tous obtenu votre diplome\n\n\n  avec franc succes!\n\n\n  Felicitation!!!', 13)   
-                self.addSprite(jeton_remise_diplome)
-            elif self.task == 14 and len(self.getSprites) == 20:
-                jeton_creation_boite = Jeton(self.MAP.getPos()[0]*2+70, self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 'Vous etes tout a fait libre desormais\n\n\n  pour creer votre propre  entreprise.\n\n\n  avec toutes les competences acquises\n\n\n  pendant votre parcours', 14)   
-                self.addSprite(jeton_creation_boite)
+                jeton = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 3,'Bienvenue à l\'EPSI ! Venez decouvrir la vie\n etudiante sur notre campus le temps d\'une\n journee.\n\n\nCommmence par rendre visite au coach Mydil\npresent au centre du campus !', 0)       
+            elif self.task == 1:
+                self.TIME = '8h15 - Se rendre au MyDil'
+                jeton = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 3,'Bienvenue au MyDil. C\'est ici que tu trouves\n\n\n tous les objets qui sont a la pointe de la\n\n\n technologie. Malheureusement on m\'a cacher tous\n\n\n c\'est objet, s\'il vous plaît aidez-moi.', 1)   
+            elif self.task == 2:
+                self.TIME = '8h30 - Cours de Reseau'
+                jeton = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 3,'Bienvenue dans le cours de reseau. \n\n\nDans ce cours tu vas apprendre a installer un\nserveur web afin de permettre aux autres\n intervenant d\'heberger leur cours au format web\nsur le reseau interne de l\'ecole', 2)   
+            elif self.task == 3:
+                self.TIME = '9h30 - Cours de Reseau'
+                jeton = Jeton(self.MAP.getPos()[0]-420, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 3,'Configure et met en place un serveur web !\n\nAttention fait les choses dans le bon ordre si tu\nque tout fonctionne correctement.', 3)   
+            elif self.task == 4:
+                self.TIME = '10h15 - Pause flechette'
+                jeton = Jeton(self.MAP.getPos()[0]*2-157, self.MAP.getPos()[1]*2-34, 0, 0, 40, 8, 8, 3,'bruit de flechettes', 4)   
+            elif self.task == 5:
+                self.TIME = '10h30 - Cours Securite Web'
+                jeton = Jeton(self.MAP.getPos()[0]+400, self.MAP.getPos()[1]-160, 0, 0, 40, 8, 8, 3,'Bien le bonjour. Assieds-toi et prends place\n\n\n pour le cours de securite web. Tu vas etre\n\n\n sensibiliser sur la securite a travers une\n epreuve de hacking.', 5)   
+            elif self.task == 6:
+                self.TIME = '11h30 - Cours Securite Web'
+                jeton = Jeton(self.MAP.getPos()[0]+428, self.MAP.getPos()[1]-30, 0, 0, 40, 8, 8, 3,'Le mots de passe est perdu...\n\n\n Trouve un moyen de te connecter ;) ', 6)   
+            elif self.task == 7:
+                self.TIME = '12h30 - Pause Dejeuner'
+                jeton = Jeton(self.MAP.getPos()[0]+332, self.MAP.getPos()[1]*2+50, 0, 0, 40, 8, 8, 3,'**Bruit de Micro-ondes***', 7)   
+            elif self.task == 8:
+                self.TIME = '13h30 - Cours Programmation'
+                jeton = Jeton(self.MAP.getPos()[0]-150, self.MAP.getPos()[1]//10+100, 0, 0, 40, 8, 8, 3,'Assieds-toi!\n\n\n Vous etes ici dans le cours de Programmation.\n\n\n Je vous invite à prendre des notes des\n\n\n  commandes à retenir ',8)   
+            elif self.task == 9:
+                self.TIME = '14h30 - Cours Programmation'
+                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]//10+172, 0, 0, 40, 8, 8, 3,'L\'epreuve est tres simple,\n\n\n fait avancer le robot en trouvant le code correct :) ', 9)   
+            elif self.task == 10:
+                self.TIME = '15h15 - Pause dans le couloir'
+                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]-36, 0, 0, 40, 8, 8, 3,'Blablablablabla', 10)   
+            elif self.task == 11:
+                self.TIME = '15h30 - Cours Marketing/Communication'
+                jeton = Jeton(self.MAP.getPos()[0]//2-50, self.MAP.getPos()[1]//3-30, 0, 0, 40, 8, 8, 3,'Bonjour,Vous etes ici en cours de Marketing.\n\n\n Nous allons voir les différents\n\n\n  types d\'entreprises.', 11)   
+            elif self.task == 12:
+                self.TIME = '16h30 - Cours Marketing/Communication'
+                jeton = Jeton(self.MAP.getPos()[0]*2-50, self.MAP.getPos()[1]//3+10, 0, 0, 40, 8, 8, 3,'Voici un petit questionnaire,\n\n\n  afin de bien choisir son cursus\n\n\n  au sein de l\'etablissement.', 12)   
+            elif self.task == 13:
+                self.TIME = '17h30 - Remise des Diplomes'
+                jeton = Jeton(self.MAP.getPos()[0]-360, self.MAP.getPos()[1]+200, 0, 0, 40, 8, 8, 3,'Prenez place, Expert IT.\n\n\n Vous avez tous obtenu votre diplome\n\n\n  avec franc succes!\n\n\n  Felicitation!!!', 13)   
+            else:
+                self.TIME = '18h - Game Over'
+                jeton = Jeton(self.MAP.getPos()[0]*2+70, self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Vous etes tout a fait libre desormais\n\n\n  pour creer votre propre  entreprise.\n\n\n  avec toutes les competences acquises\n\n\n  pendant votre parcours', 14)   
+            # jeton Mydil
+            if len(self.INVENTORY) != 0 and self.task > 1:
+                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Merci beaucoup !\n\nIl reste des objets a trouver, je\n compte sur toi !', 15)
+            # on affiche le jeton sur l'écran
+            inList = False
+            for j in self.getSprites: 
+                if isinstance(j, Jeton):
+                    if j.getText() == jeton.getText():
+                        inList = True
+            if not inList:
+                self.addSprite(jeton) # si on a pas encore affiché le jeton d'interaction
 
+
+        
         # on update les sprites & les textes
             for s in self.getSprites:
                 s.update(self.KEYS_PRESSED)
@@ -473,10 +506,12 @@ class App:
         ''' on affiche la map'''
         m = self.MAP
         pyxel.bltm(m.draw[0], m.draw[1], m.draw[2], m.draw[3], m.draw[4], m.draw[5]*8, m.draw[6]*8, self.cold_key, 0, 4)
+        pyxel.blt(0, 0, 0, 0, 242, 256, 12)
+        pyxel.blt(0, pyxel.height-12, 0, 0, 242, 256, 12)
         
         '''on parcours les sprites et les textes et on les affiche'''
         for s in self.getSprites:
-            pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key, 0, 4)
+            pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key, 0, s.draw[7])
         for ts in self.getTsprites:
             pyxel.blt(ts.draw[0], ts.draw[1], ts.draw[2], ts.draw[3], ts.draw[4], ts.draw[5], ts.draw[6], self.cold_key, 0, ts.draw[7])
         for t in self.getText:

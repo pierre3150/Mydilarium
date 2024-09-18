@@ -3,7 +3,7 @@ import pyxel
 class Jeton():
     ''' affiche une texture à l'endroit souhaité'''
 # constructeur
-    def __init__(self, x, y, img, x_texture, y_texture, width, height, text, index) -> None:
+    def __init__(self, x, y, img, x_texture, y_texture, width, height, scale, text, index) -> None:
         self.x = x
         self.y = y
         self.img = img
@@ -14,6 +14,7 @@ class Jeton():
         self.speed_scrolling = 6
         self.text = text
         self.index = index
+        self.scale = scale
 
     def getText(self):
         return self.text
@@ -28,7 +29,8 @@ class Jeton():
         if self.y_texture == 40:
             self.x_texture, self.y_texture = self.x_texture+8, 40
         if self.y_texture == 48:
-            self.x_texture, self.y_texture = self.x_texture+8, 48
+            if self.x_texture < 8:
+                self.x_texture, self.y_texture = self.x_texture+8, 48
 
     def isComplete(self):
         return self.x_texture == 8 and self.y_texture == 40
@@ -45,6 +47,6 @@ class Jeton():
 
     @property
     def draw(self):
-        return self.x, self.y, self.img, self.x_texture, self.y_texture, self.width, self.height
+        return self.x, self.y, self.img, self.x_texture, self.y_texture, self.width, self.height, self.scale
     
 

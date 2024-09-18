@@ -2,7 +2,7 @@ import pyxel
 
 class Player():
 
-    def __init__(self, x, y, img, x_texture, y_texture, width, height):
+    def __init__(self, x, y, img, x_texture, y_texture, width, height, scale):
         # caratéristiques du Player
         self.x = x
         self.y = y
@@ -13,6 +13,7 @@ class Player():
         self.height = height
         self.default_texture_x = 8
         self.default_texture_y = 8
+        self.scale = scale
 
     def getPos(self):
         return self.x, self.y
@@ -47,4 +48,4 @@ class Player():
 
     @property
     def draw(self):
-        return self.x, self.y, self.img, self.x_texture, self.y_texture, self.width, self.height
+        return self.x, self.y, self.img, self.x_texture, self.y_texture, self.width, self.height, self.scale
