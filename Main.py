@@ -366,13 +366,13 @@ class App:
                 jeton_reseau_epreuve = Jeton(self.MAP.getPos()[0]-420, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 'Bienvenue au cours de WEB. Dans ce cours, tu devras te reconnaitre à mon compte, or à chaque fois j\'oublie mon mdp. Je me souviens juste que je l\'ai mis dans mon code. Si tu le retouve, je te donne l\'objet', 3)   
                 self.addSprite(jeton_reseau_epreuve) 
             elif self.task == 4 and len(self.getSprites) == 5:
-                jeton_pause = Jeton(self.MAP.getPos()[0]*2-157, self.MAP.getPos()[1]*2-34, 0, 0, 40, 8, 8, 'Salut et Bienvenue au cours de DEV. Si tu es la, c\'est que tu dois sûrement vouloir l\'objet. Je te le donne que si tu m\'aides pour ce petit programme sur lequel j\'ai du mal.', 4)   
+                jeton_pause = Jeton(self.MAP.getPos()[0]*2-157, self.MAP.getPos()[1]*2-34, 0, 0, 40, 8, 8, 'text', 4)   
                 self.addSprite(jeton_pause)
             elif self.task == 5 and len(self.getSprites) == 6:
-                jeton_web_cours = Jeton(self.MAP.getPos()[0]+400, self.MAP.getPos()[1]-160, 0, 0, 40, 8, 8, 'Bien le bonjour. Assez toi et prends place pour le cours de marketing. Si tu restes assez assidue, tu pourras récupérer le dernier objet.', 5)   
+                jeton_web_cours = Jeton(self.MAP.getPos()[0]+400, self.MAP.getPos()[1]-160, 0, 0, 40, 8, 8, 'Salut et Bienvenue au cours de DEV. Si tu es la, c\'est que tu dois sûrement vouloir l\'objet. Je te le donne que si tu m\'aides pour ce petit programme sur lequel j\'ai du mal.', 5)   
                 self.addSprite(jeton_web_cours)
             elif self.task == 6 and len(self.getSprites) == 7:
-                jeton_web_epreuve = Jeton(self.MAP.getPos()[0]+428, self.MAP.getPos()[1]-30, 0, 0, 40, 8, 8, 'text', 6)   
+                jeton_web_epreuve = Jeton(self.MAP.getPos()[0]+428, self.MAP.getPos()[1]-30, 0, 0, 40, 8, 8, 'Bien le bonjour. Assez toi et prends place pour le cours de marketing. Si tu restes assez assidue, tu pourras récupérer le dernier objet.', 6)   
                 self.addSprite(jeton_web_epreuve)
             elif self.task == 7 and len(self.getSprites) == 8:
                 jeton_midi = Jeton(self.MAP.getPos()[0]+332, self.MAP.getPos()[1]*2+50, 0, 0, 40, 8, 8, 'text', 7)   
