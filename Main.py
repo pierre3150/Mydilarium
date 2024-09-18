@@ -113,17 +113,21 @@ class App:
             if len(self.getTsprites) == 0:
                 x = Image(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16, 1)
                 self.addTsprite(x)
+                # texte menu informations
+                text = Text(pyxel.width // 2 - 40, pyxel.height // 2 + 60, "Menu d'information(i)", 5)
+                self.addText(text)
         #Screen information
-            text = Text(pyxel.width // 2 - 40, pyxel.height // 2 + 60, "Menu d'information(i)", 5)
-            self.addText(text)
             if pyxel.btnp(pyxel.KEY_I): 
                 if self.INTERFACE==True:
                     self.removeTsprite(self.getTsprites[-1])
-                    self.removeText(self.getText[-1])
+                    # texte menu informations
+                    text = Text(pyxel.width // 2 - 40, pyxel.height // 2 + 60, "Menu d'information(i)", 5)
+                    self.addText(text)
                     self.INTERFACE=False
                 else:
                     menu = Image(95,110,0,0,168,64,64,3)
                     self.addTsprite(menu)
+                    self.removeText(self.getText[-1]) # on supprime le texte du menu d'informations
                     self.INTERFACE = True
 
         # détection de lancement de partie
@@ -131,6 +135,7 @@ class App:
                 self.removeTsprite(self.getTsprites[0])
                 # on tp le joueur
                 self.MAP.x, self.MAP.y= -470, 100
+                self.TEXT.clear()
                 self.setState('PLAYING') # on change l'état de la partie en PLAYING
 
 
@@ -143,7 +148,7 @@ class App:
 
         # déplacement 
             # UP
-            target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:])
+            target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:]) # jeton le plus proche
             if not self.INTERFACE:
                 if pyxel.btn(pyxel.KEY_Z) or pyxel.btn(pyxel.KEY_O):
                     self.UP(True)
