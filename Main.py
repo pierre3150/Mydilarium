@@ -1,9 +1,13 @@
 import pyxel
+import webbrowser
+import os
 from Sprites.Player import Player
 from Sprites.Map import Map
 from Sprites.Image import Image
 from Sprites.Jeton import Jeton
 from Sprites.Text import Text
+
+path = os.path.join("web", "index.html")
 
 class App:
 # constructeur
@@ -153,6 +157,10 @@ class App:
                     # gestion des MENUS jetons interactions
                         if target_jeton.getNb() == 0 or target_jeton.getNb() == 1:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            
                             self.addTsprite(bulle)
                             print(target_jeton.getText())
                             if len(self.getText)>1:
