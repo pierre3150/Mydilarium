@@ -305,6 +305,10 @@ class App:
                             self.CompleteTask(target_jeton)
                             self.TIME = '18h - Game Over'
 
+                        for objtext in self.getText:
+                            if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
+                                self.removeText(objtext)# suppr le texte d'indication
+                                
                         self.INTERFACE = True
                 else:
                     for objtext in self.getText:
