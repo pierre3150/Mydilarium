@@ -198,20 +198,15 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '8h30 - Cours de Réseau'
+                            self.TIME = '8h30 - Cours de Reseau'
 
                         elif target_jeton.getNb() == 2:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
                             # texte de la bulle
-                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            # on ouvre une page web
-                            path = os.path.join("web", "cours_res.html")
-                            url = "file://" + os.path.abspath(path)
-                            webbrowser.open(url)
-                            
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))              
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '9h30 - Cours de Réseau'
+                            self.TIME = '9h30 - Cours de Reseau'
 
                         elif target_jeton.getNb() == 3:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -220,7 +215,7 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
-                            self.TIME = '10h15 - Pause fléchette'
+                            self.TIME = '10h15 - Pause flechette'
 
                         elif target_jeton.getNb() == 4:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -229,7 +224,7 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '10h30 - Cours Sécurité Web'
+                            self.TIME = '10h30 - Cours Securité Web'
                         
                         elif target_jeton.getNb() == 5:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
@@ -244,7 +239,7 @@ class App:
                             
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
-                            self.TIME = '11h30 - Cours Sécurité Web'
+                            self.TIME = '11h30 - Cours Securité Web'
                         
                         elif target_jeton.getNb() == 6:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
