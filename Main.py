@@ -115,6 +115,7 @@ class App:
         if self.isState('WAITING'):
         # texte indicatif space to interact 
             if len(self.getTsprites) == 0:
+                pyxel.playm(0, 1, True)# on lance la musique
                 x = Image(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16, 1)
                 self.addTsprite(x)
                 # texte menu informations
@@ -150,6 +151,7 @@ class App:
                 # on crée un joueur
                 player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8, 4) 
                 self.addSprite(player)
+
                 # crée les objets manquant du MyDil
                 objet1 = Jeton(self.MAP.getPos()[0]*2+36, self.MAP.getPos()[1]+34, 0, 0, 48, 8, 8, 2,'     Casque virtuel !\n\n\nRapporte le vite au MyDil', 15)
                 objet2 = Jeton(self.MAP.getPos()[0]//2-40, self.MAP.getPos()[1]*3+28, 0, 0, 48, 8, 8, 2,"    Carte Raspberry !\n\n\nRapporte le vite au MyDil", 16)
@@ -340,8 +342,8 @@ class App:
                         self.INTERFACE = True
 
                     # gestion objets Mydil cachés
-                        if not target_jeton.isComplete():
-                            if target_jeton.getNb() == 15:
+                        if target_jeton.getNb() == 15:
+                            if not target_jeton.isComplete():
                                 casque = Image(pyxel.width//2, pyxel.height*1/3, 0, 32, 128, 16, 16, 6)
                                 self.addTsprite(casque)
                                 pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
@@ -356,7 +358,10 @@ class App:
                                 else:
                                     # texte de la bulle
                                     self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                            elif target_jeton.getNb() == 16:
+                            else:
+                                self.INTERFACE = False  # si on essaie de réinteragir avec un objet deja trouvé on n'ouvre pas de menu 
+                        elif target_jeton.getNb() == 16:
+                            if not target_jeton.isComplete():
                                 raspberry = Image(pyxel.width//2, pyxel.height*1/3, 0, 16, 112, 16, 16, 6)
                                 self.addTsprite(raspberry)
                                 pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
@@ -370,7 +375,10 @@ class App:
                                 else:
                                     # texte de la bulle
                                     self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                            elif target_jeton.getNb() == 17:
+                            else:
+                                self.INTERFACE = False  # si on essaie de réinteragir avec un objet deja trouvé on n'ouvre pas de menu 
+                        elif target_jeton.getNb() == 17:
+                            if not target_jeton.isComplete():
                                 robot = Image(pyxel.width//2, pyxel.height*1/3, 0, 0, 128, 16, 16, 6)
                                 self.addTsprite(robot)
                                 pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
@@ -384,7 +392,10 @@ class App:
                                 else:
                                     # texte de la bulle
                                     self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                            elif target_jeton.getNb() == 18:
+                            else:
+                                self.INTERFACE = False  # si on essaie de réinteragir avec un objet deja trouvé on n'ouvre pas de menu 
+                        elif target_jeton.getNb() == 18:
+                            if not target_jeton.isComplete():
                                 manette = Image(pyxel.width//2, pyxel.height*1/3, 0, 0, 112, 16, 16, 6)
                                 self.addTsprite(manette)
                                 pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
@@ -398,7 +409,10 @@ class App:
                                 else:
                                     # texte de la bulle
                                     self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                            elif target_jeton.getNb() == 19:
+                            else:
+                                self.INTERFACE = False  # si on essaie de réinteragir avec un objet deja trouvé on n'ouvre pas de menu 
+                        elif target_jeton.getNb() == 19:
+                            if not target_jeton.isComplete():
                                 imprimante = Image(pyxel.width//2, pyxel.height*1/3, 0, 48, 128, 16, 16, 6)
                                 self.addTsprite(imprimante)
                                 pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
@@ -411,10 +425,9 @@ class App:
                                     target_jeton.Complete()
                                 else:
                                     # texte de la bulle
-                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                        else:
-                            self.INTERFACE = False  # si on essaie de réinteragir avec un objet deja trouvé on n'ouvre pas de menu  
-
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))        
+                            else:
+                                self.INTERFACE = False  # si on essaie de réinteragir avec un objet deja trouvé on n'ouvre pas de menu 
                         for objtext in self.getText:
                             if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
                                 self.removeText(objtext)# suppr le texte d'indication
@@ -448,7 +461,7 @@ class App:
                 jeton = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 3,'Bienvenue à l\'EPSI ! Venez decouvrir la vie\n etudiante sur notre campus le temps d\'une\n journee.\n\n\nCommmence par rendre visite au coach Mydil\npresent au centre du campus !', 0)       
             elif self.task == 1:
                 self.TIME = '8h15 - Se rendre au MyDil'
-                jeton = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 3,'Bienvenue au MyDil. C\'est ici que tu trouves\n\n\n tous les objets qui sont a la pointe de la\n\n\n technologie. Malheureusement on m\'a cacher tous\n\n\n c\'est objet, s\'il vous plaît aidez-moi.', 1)   
+                jeton = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 3,'Bienvenue au MyDil. C\'est ici que tu trouves\n\n tous les objets qui sont a la pointe de la\n\n technologie. Malheureusement tous\n\n ces objets, ce sont fait derober et cacher,\n\n s\'il te plait aide-moi a les trouver.', 1)   
             elif self.task == 2:
                 self.TIME = '8h30 - Cours de Reseau'
                 jeton = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 3,'Bienvenue dans le cours de reseau. \n\n\nDans ce cours tu vas apprendre a installer un\nserveur web afin de permettre aux autres\n intervenant d\'heberger leur cours au format web\nsur le reseau interne de l\'ecole', 2)   
