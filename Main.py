@@ -22,6 +22,7 @@ class App:
         self.INTERFACE = False # si une interface est ouverte dans le jeu
         self.TIME = '8H - Debut de la journee '
         self.task = 0 # Tâche actuelle
+        self.deleteJeton = []
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256) # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
@@ -100,10 +101,12 @@ class App:
                 jeton = pos
         return jeton
 # complète une tâche et passe à la suivante
-    def CompleteTask(self, jeton):
+    def CompleteTask(self, jeton, deleteAfterOpen):
         if not jeton.isComplete():
             jeton.Complete()
             self.task += 1
+        if deleteAfterOpen:
+            self.deleteJeton.append(jeton)
 
 # Gestion global du jeu
     def update(self):
@@ -185,7 +188,7 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
 
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, True)
                             self.TIME = '8h15 - Se rendre au MyDil'
 
                         elif target_jeton.getNb() == 1:
@@ -194,7 +197,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, False)
                             self.TIME = '8h30 - Cours de Réseau'
 
                         elif target_jeton.getNb() == 2:
@@ -207,7 +210,7 @@ class App:
                             url = "file://" + os.path.abspath(path)
                             webbrowser.open(url)
                             
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, False)
                             self.TIME = '9h30 - Cours de Réseau'
 
                         elif target_jeton.getNb() == 3:
@@ -216,7 +219,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, True)
                             self.TIME = '10h15 - Pause fléchette'
 
                         elif target_jeton.getNb() == 4:
@@ -225,7 +228,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, False)
                             self.TIME = '10h30 - Cours Sécurité Web'
                         
                         elif target_jeton.getNb() == 5:
@@ -240,7 +243,7 @@ class App:
                             webbrowser.open(url)
                             
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, False)
                             self.TIME = '11h30 - Cours Sécurité Web'
                         
                         elif target_jeton.getNb() == 6:
@@ -255,7 +258,7 @@ class App:
                             webbrowser.open(url)
                             
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, True)
                             self.TIME = '12h30 - Pause Dejeuner'
 
                         elif target_jeton.getNb() == 7:
@@ -264,7 +267,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, False)
                             self.TIME = '13h30 - Cours Programmation'
 
                         elif target_jeton.getNb() == 8:
@@ -273,7 +276,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, False)
                             self.TIME = '14h30 - Cours Programmation'
 
                         elif target_jeton.getNb() == 9:
@@ -282,7 +285,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, True)
                             self.TIME = '15h15 - Pause dans le couloir'
 
                         elif target_jeton.getNb() == 10:
@@ -291,7 +294,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, True)
                             self.TIME = '15h30 - Cours Marketing/Communication'
 
                         elif target_jeton.getNb() == 11:
@@ -300,7 +303,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, False)
                             self.TIME = '16h30 - Cours Marketing/Communication'
                         
                         elif target_jeton.getNb() == 12:
@@ -309,7 +312,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, True)
                             self.TIME = '17h30 - Remise des Diplomes'
                         
                         elif target_jeton.getNb() == 13:
@@ -318,7 +321,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, True)
                             self.TIME = '18h - Sortir de l\'EPSI'
                         
                         elif target_jeton.getNb() == 14:
@@ -327,7 +330,7 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton)
+                            self.CompleteTask(target_jeton, True)
                             self.TIME = '18h - Game Over'
 
                         for objtext in self.getText:
@@ -345,16 +348,21 @@ class App:
                 # on retire le texte d'indication
                 # si on réappuye sur E on ferme le MENU
                 if pyxel.btnp(pyxel.KEY_E):
+                    # on supprime les textes et la bulle
                     for objtext in self.getText:
                         if objtext.getText() in target_jeton.getText():
-                            self.removeText(objtext)# on supprime les textes et la bulle
+                            self.removeText(objtext)
                     self.removeTsprite(self.getTsprites[-1])
+                    # on supprimer le jeton après consultation si nécessaire
+                    for jeton in self.deleteJeton:
+                        if jeton in self.getSprites:
+                            self.removeSprite(jeton)
                     self.INTERFACE = False
 
         #gestion des jetons à afficher
             if self.task == 0 and len(self.getSprites) == 1:
                 # on crée le premier jeton à l'entrée de l'EPSI
-                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'Bienvenue à l\'EPSI ! Venez decouvrir la vie\n etudiante sur notre campus le temps d\'une\n journee.\n\n\nCommmence par rendre visite au coach Mydil present au\ncentre du campus !', 0)   
+                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'Bienvenue à l\'EPSI ! Venez decouvrir la vie\n etudiante sur notre campus le temps d\'une\n journee.\n\n\nCommmence par rendre visite au coach Mydil\npresent au centre du campus !', 0)   
                 self.addSprite(jeton_entree)    
             elif self.task == 1 and len(self.getSprites) == 2:
                 jeton_mydil = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 'Bienvenue au MyDil. C\'est ici que tu trouves tous les objets qui sont a la pointe de la technologie. Malheureusement on m\'a volé tous c\'est objet, s\'il vous plaît aidez-moi.', 1)   
