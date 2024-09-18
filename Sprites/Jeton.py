@@ -33,7 +33,7 @@ class Jeton():
                 self.x_texture, self.y_texture = self.x_texture+8, 48
 
     def isComplete(self):
-        return self.x_texture == 8 and self.y_texture == 40
+        return self.x_texture == 8 and self.y_texture == 40 or self.x_texture == 8 and self.y_texture == 48
     
     def update(self, keys):
         if keys['UP'] and pyxel.pget(pyxel.width//2, pyxel.height//2-14)!=0:

@@ -325,88 +325,100 @@ class App:
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
+
+                        elif target_jeton.getNb() == 20:
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
+                            self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on vide l'inventaire
+                            self.INVENTORY.clear()
+                            # on complète la tâche
+                            target_jeton.Complete()
+                            self.deleteJeton.append(target_jeton)
                             
+                        self.INTERFACE = True
 
                     # gestion objets Mydil cachés
-                        elif target_jeton.getNb() == 15:
-                            print(self.task)
-                            casque = Image(pyxel.width//2, pyxel.height*1/3, 0, 32, 128, 16, 16, 6)
-                            self.addTsprite(casque)
-                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
-                            self.addTsprite(pancarte)
-                            if len(self.INVENTORY) == 0:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
-                                
-                                # on complète la tâche
-                                target_jeton.Complete()
-                            else:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                        elif target_jeton.getNb() == 16:
-                            raspberry = Image(pyxel.width//2, pyxel.height*1/3, 0, 16, 112, 16, 16, 6)
-                            self.addTsprite(raspberry)
-                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
-                            self.addTsprite(pancarte)
-                            if len(self.INVENTORY) == 0:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
-                                # on complète la tâche
-                                target_jeton.Complete()
-                            else:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                        elif target_jeton.getNb() == 17:
-                            robot = Image(pyxel.width//2, pyxel.height*1/3, 0, 0, 128, 16, 16, 6)
-                            self.addTsprite(robot)
-                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
-                            self.addTsprite(pancarte)
-                            if len(self.INVENTORY) == 0:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
-                                # on complète la tâche
-                                target_jeton.Complete()
-                            else:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                        elif target_jeton.getNb() == 18:
-                            manette = Image(pyxel.width//2, pyxel.height*1/3, 0, 0, 112, 16, 16, 6)
-                            self.addTsprite(manette)
-                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
-                            self.addTsprite(pancarte)
-                            if len(self.INVENTORY) == 0:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
-                                # on complète la tâche
-                                target_jeton.Complete()
-                            else:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                        elif target_jeton.getNb() == 19:
-                            imprimante = Image(pyxel.width//2, pyxel.height*1/3, 0, 48, 128, 16, 16, 6)
-                            self.addTsprite(imprimante)
-                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
-                            self.addTsprite(pancarte)
-                            if len(self.INVENTORY) == 0:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
-                                self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
-                                # on complète la tâche
-                                target_jeton.Complete()
-                            else:
-                                # texte de la bulle
-                                self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
-                        
+                        if not target_jeton.isComplete():
+                            if target_jeton.getNb() == 15:
+                                casque = Image(pyxel.width//2, pyxel.height*1/3, 0, 32, 128, 16, 16, 6)
+                                self.addTsprite(casque)
+                                pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                                self.addTsprite(pancarte)
+                                if len(self.INVENTORY) == 0:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                    self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                    
+                                    # on complète la tâche
+                                    target_jeton.Complete()
+                                else:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
+                            elif target_jeton.getNb() == 16:
+                                raspberry = Image(pyxel.width//2, pyxel.height*1/3, 0, 16, 112, 16, 16, 6)
+                                self.addTsprite(raspberry)
+                                pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                                self.addTsprite(pancarte)
+                                if len(self.INVENTORY) == 0:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                    self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                    # on complète la tâche
+                                    target_jeton.Complete()
+                                else:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
+                            elif target_jeton.getNb() == 17:
+                                robot = Image(pyxel.width//2, pyxel.height*1/3, 0, 0, 128, 16, 16, 6)
+                                self.addTsprite(robot)
+                                pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                                self.addTsprite(pancarte)
+                                if len(self.INVENTORY) == 0:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                    self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                    # on complète la tâche
+                                    target_jeton.Complete()
+                                else:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
+                            elif target_jeton.getNb() == 18:
+                                manette = Image(pyxel.width//2, pyxel.height*1/3, 0, 0, 112, 16, 16, 6)
+                                self.addTsprite(manette)
+                                pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                                self.addTsprite(pancarte)
+                                if len(self.INVENTORY) == 0:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                    self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                    # on complète la tâche
+                                    target_jeton.Complete()
+                                else:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
+                            elif target_jeton.getNb() == 19:
+                                imprimante = Image(pyxel.width//2, pyxel.height*1/3, 0, 48, 128, 16, 16, 6)
+                                self.addTsprite(imprimante)
+                                pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                                self.addTsprite(pancarte)
+                                if len(self.INVENTORY) == 0:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, target_jeton.getText(), 7))
+                                    self.INVENTORY.append(target_jeton)# on ajoute à l'inventaire
+                                    # on complète la tâche
+                                    target_jeton.Complete()
+                                else:
+                                    # texte de la bulle
+                                    self.addText(Text(pyxel.width//3.2, pyxel.height-60, 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.', 7))
+                        else:
+                            self.INTERFACE = False  # si on essaie de réinteragir avec un objet deja trouvé on n'ouvre pas de menu  
 
                         for objtext in self.getText:
                             if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
                                 self.removeText(objtext)# suppr le texte d'indication
 
-                        self.INTERFACE = True
                 else:
                     for objtext in self.getText:
                         if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
@@ -418,9 +430,10 @@ class App:
                 # si on réappuye sur E on ferme le MENU
                 if pyxel.btnp(pyxel.KEY_E):
                     # on supprime les textes et la bulle
-                    for objtext in self.getText:
+                    '''for objtext in self.getText:
                         if objtext.getText() in target_jeton.getText() or objtext.getText() in 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.':
-                            self.removeText(objtext)
+                    '''
+                    self.getText.clear()
                     self.getTsprites.clear() # on supprime les images du menu
                     # on supprimer le jeton après consultation si nécessaire
                     for jeton in self.deleteJeton:
@@ -477,7 +490,7 @@ class App:
                 jeton = Jeton(self.MAP.getPos()[0]*2+70, self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Vous etes tout a fait libre desormais\n\n\n  pour creer votre propre  entreprise.\n\n\n  avec toutes les competences acquises\n\n\n  pendant votre parcours', 14)   
             # jeton Mydil
             if len(self.INVENTORY) != 0 and self.task > 1:
-                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Merci beaucoup !\n\nIl reste des objets a trouver, je\n compte sur toi !', 15)
+                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Merci beaucoup !\n\nIl reste des objets a trouver, je\n compte sur toi !', 20)
             # on affiche le jeton sur l'écran
             inList = False
             for j in self.getSprites: 
