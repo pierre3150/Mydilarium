@@ -20,7 +20,7 @@ class App:
         self.TEXT = [] # liste des textes de notre jeu à afficher
         self.MAP = Map(480, 192, 0, 0, 0, 40, 16)
         self.INTERFACE = False # si une interface est ouverte dans le jeu
-        self.TIME = '8H - Début de la journée '
+        self.TIME = '8H - Debut de la journee '
         self.task = 0 # Tâche actuelle
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256) # dimension de la fenêtre
@@ -75,6 +75,7 @@ class App:
         ''' retourne la liste de tous les textes à afficher'''
         return self.TEXT
     
+    
 # Gestion des déplacements
     def UP(self, bool):
         self.KEYS_PRESSED['UP'] = bool
@@ -108,16 +109,31 @@ class App:
     def update(self):
         '''update des éléments du jeu'''
         if self.isState('WAITING'):
-        # texte indicatif 
+        # texte indicatif space to interact 
             if len(self.getTsprites) == 0:
                 x = Image(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16, 1)
                 self.addTsprite(x)
+        #Screen information
+            text = Text(pyxel.width // 2 - 40, pyxel.height // 2 + 60, "Menu d'information(i)", 5)
+            self.addText(text)
+            if pyxel.btnp(pyxel.KEY_I): 
+                if self.INTERFACE==True:
+                    self.removeTsprite(self.getTsprites[-1])
+                    self.INTERFACE=False
+                else:
+                    menu = Image(95,100,0,0,168,64,64,3)
+                    self.addTsprite(menu)
+                    self.INTERFACE = True
+
+
         # détection de lancement de partie
             if pyxel.btn(pyxel.KEY_SPACE):
                 self.removeTsprite(self.getTsprites[0])
                 # on tp le joueur
                 self.MAP.x, self.MAP.y= -470, 100
                 self.setState('PLAYING') # on change l'état de la partie en PLAYING
+
+        
 
         elif self.isState('PLAYING'):
         # on affiche des éléments de la partie quand elle débute
@@ -151,7 +167,7 @@ class App:
             # Détection interaction
                 target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:])
                 if target_jeton in self.getSprites: # si on est assez proche d'un jeton
-                    if len(self.getText)==1:
+                    if len(self.getText)==0:
                         self.addText(Text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7))
 
                     if pyxel.btnp(pyxel.KEY_E):
@@ -160,9 +176,7 @@ class App:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
                             
                             self.addTsprite(bulle)
-                            print(target_jeton.getText())
-                            if len(self.getText)>1:
-                                self.removeText(self.getText[-1]) # supprime le dernier text
+                            # texte de la bulle
                             self.addText(Text(pyxel.width//15, pyxel.height//1.48, target_jeton.getText(), 7))
 
                             # on complète la tâche
@@ -270,7 +284,7 @@ class App:
                             self.addTsprite(bulle)
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
-                            self.TIME = '17h30 - Remise des Diplômes'
+                            self.TIME = '17h30 - Remise des Diplomes'
                         
                         elif target_jeton.getNb() == 13:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
@@ -287,14 +301,16 @@ class App:
 
                         self.INTERFACE = True
                 else:
-                    if len(self.getText)>1:
-                        self.removeText(self.getText[-1]) # supprime le dernier text
+                    for objtext in self.getText:
+                        if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
+                            self.removeText(objtext)
                         
             else:
                 self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
                 # on retire le texte d'indication
                 # si on réappuye sur E on ferme le MENU
                 if pyxel.btnp(pyxel.KEY_E):
+                    self.removeText# on supprime les textes et la bulle
                     self.removeTsprite(self.getTsprites[-1])
                     self.INTERFACE = False
 
@@ -345,13 +361,6 @@ class App:
             elif self.task == 14 and len(self.getSprites) == 15:
                 jeton_creation_boite = Jeton(self.MAP.getPos()[0]*2+70, self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 'text', 14)   
                 self.addSprite(jeton_creation_boite)
-            
-
-
-        #Horloge 
-            if len(self.getText) == 0:
-                text = Text(pyxel.width//1-47,3, self.TIME, 7)
-                self.addText(text)
 
         # on update les sprites & les textes
             for s in self.getSprites:
@@ -378,5 +387,8 @@ class App:
             pyxel.blt(ts.draw[0], ts.draw[1], ts.draw[2], ts.draw[3], ts.draw[4], ts.draw[5], ts.draw[6], self.cold_key, 0, ts.draw[7])
         for t in self.getText:
             pyxel.text(t.draw[0], t.draw[1], t.draw[2], t.draw[3])
+        # on affiche l'horloge
+        if self.isState('PLAYING'):
+            pyxel.text(pyxel.width*1/3,3, self.TIME, 7)
 
 App()

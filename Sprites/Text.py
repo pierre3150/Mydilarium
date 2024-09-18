@@ -8,6 +8,9 @@ class Text():
         self.text = text
         self.color = color
 
+    def getText(self):
+        return self.text
+
     def update(self, keys):
         pass
 
