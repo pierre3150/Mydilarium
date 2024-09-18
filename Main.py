@@ -178,29 +178,30 @@ class App:
                     if pyxel.btnp(pyxel.KEY_E):
                     # gestion des MENUS jetons interactions
                         if target_jeton.getNb() == 0:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             
                             self.addTsprite(bulle)
                             # texte de la bulle
-                            self.addText(Text(pyxel.width//15, pyxel.height//1.48, target_jeton.getText(), 7))
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
 
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '8h15 - Se rendre au MyDil'
 
                         elif target_jeton.getNb() == 1:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            
                             self.CompleteTask(target_jeton)
                             self.TIME = '8h30 - Cours de Réseau'
 
                         elif target_jeton.getNb() == 2:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
-                            # on complète la tâche
-                            
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on ouvre une page web
                             path = os.path.join("web", "cours_res.html")
                             url = "file://" + os.path.abspath(path)
@@ -210,22 +211,28 @@ class App:
                             self.TIME = '9h30 - Cours de Réseau'
 
                         elif target_jeton.getNb() == 3:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '10h15 - Pause fléchette'
 
                         elif target_jeton.getNb() == 4:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '10h30 - Cours Sécurité Web'
                         
                         elif target_jeton.getNb() == 5:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             
                             # on ouvre une page web
                             path = os.path.join("web", "cours_web.html")
@@ -237,8 +244,10 @@ class App:
                             self.TIME = '11h30 - Cours Sécurité Web'
                         
                         elif target_jeton.getNb() == 6:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             
                             # on ouvre une page web
                             path = os.path.join("web", "test_web.html")
@@ -250,57 +259,73 @@ class App:
                             self.TIME = '12h30 - Pause Dejeuner'
 
                         elif target_jeton.getNb() == 7:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '13h30 - Cours Programmation'
 
                         elif target_jeton.getNb() == 8:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '14h30 - Cours Programmation'
 
                         elif target_jeton.getNb() == 9:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '15h15 - Pause dans le couloir'
 
                         elif target_jeton.getNb() == 10:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '15h30 - Cours Marketing/Communication'
 
                         elif target_jeton.getNb() == 11:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '16h30 - Cours Marketing/Communication'
                         
                         elif target_jeton.getNb() == 12:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '17h30 - Remise des Diplomes'
                         
                         elif target_jeton.getNb() == 13:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '18h - Sortir de l\'EPSI'
                         
                         elif target_jeton.getNb() == 14:
-                            bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '18h - Game Over'
@@ -308,7 +333,7 @@ class App:
                         for objtext in self.getText:
                             if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
                                 self.removeText(objtext)# suppr le texte d'indication
-                                
+
                         self.INTERFACE = True
                 else:
                     for objtext in self.getText:
@@ -329,22 +354,22 @@ class App:
         #gestion des jetons à afficher
             if self.task == 0 and len(self.getSprites) == 1:
                 # on crée le premier jeton à l'entrée de l'EPSI
-                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'text', 0)   
+                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'Bienvenue à l\'EPSI ! Venez decouvrir la vie\n etudiante sur notre campus le temps d\'une\n journee.\n\n\nCommmence par rendre visite au coach Mydil present au\ncentre du campus !', 0)   
                 self.addSprite(jeton_entree)    
             elif self.task == 1 and len(self.getSprites) == 2:
-                jeton_mydil = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 'text', 1)   
+                jeton_mydil = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 'Bienvenue au MyDil. C\'est ici que tu trouves tous les objets qui sont a la pointe de la technologie. Malheureusement on m\'a volé tous c\'est objet, s\'il vous plaît aidez-moi.', 1)   
                 self.addSprite(jeton_mydil) 
             elif self.task == 2 and len(self.getSprites) == 3:
-                jeton_reseau_cours = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 'text', 2)   
+                jeton_reseau_cours = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 'Bienvenue dans le cours de réseau. J\'ai effectivement l\'un des objets que tu cherches. Or j\'ai d\'abord besoin de toi pour rétablir le réseau. Relie les différents matériels pour remettre le réseau en place.', 2)   
                 self.addSprite(jeton_reseau_cours) 
             elif self.task == 3 and len(self.getSprites) == 4:
-                jeton_reseau_epreuve = Jeton(self.MAP.getPos()[0]-420, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 'text', 3)   
+                jeton_reseau_epreuve = Jeton(self.MAP.getPos()[0]-420, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 'Bienvenue au cours de WEB. Dans ce cours, tu devras te reconnaitre à mon compte, or à chaque fois j\'oublie mon mdp. Je me souviens juste que je l\'ai mis dans mon code. Si tu le retouve, je te donne l\'objet', 3)   
                 self.addSprite(jeton_reseau_epreuve) 
             elif self.task == 4 and len(self.getSprites) == 5:
-                jeton_pause = Jeton(self.MAP.getPos()[0]*2-157, self.MAP.getPos()[1]*2-34, 0, 0, 40, 8, 8, 'text', 4)   
+                jeton_pause = Jeton(self.MAP.getPos()[0]*2-157, self.MAP.getPos()[1]*2-34, 0, 0, 40, 8, 8, 'Salut et Bienvenue au cours de DEV. Si tu es la, c\'est que tu dois sûrement vouloir l\'objet. Je te le donne que si tu m\'aides pour ce petit programme sur lequel j\'ai du mal.', 4)   
                 self.addSprite(jeton_pause)
             elif self.task == 5 and len(self.getSprites) == 6:
-                jeton_web_cours = Jeton(self.MAP.getPos()[0]+400, self.MAP.getPos()[1]-160, 0, 0, 40, 8, 8, 'text', 5)   
+                jeton_web_cours = Jeton(self.MAP.getPos()[0]+400, self.MAP.getPos()[1]-160, 0, 0, 40, 8, 8, 'Bien le bonjour. Assez toi et prends place pour le cours de marketing. Si tu restes assez assidue, tu pourras récupérer le dernier objet.', 5)   
                 self.addSprite(jeton_web_cours)
             elif self.task == 6 and len(self.getSprites) == 7:
                 jeton_web_epreuve = Jeton(self.MAP.getPos()[0]+428, self.MAP.getPos()[1]-30, 0, 0, 40, 8, 8, 'text', 6)   
