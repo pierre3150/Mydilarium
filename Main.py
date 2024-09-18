@@ -127,13 +127,13 @@ class App:
                     self.INTERFACE = True
 
         # détection de lancement de partie
-            if pyxel.btn(pyxel.KEY_SPACE):
+            if pyxel.btn(pyxel.KEY_SPACE)and self.INTERFACE==False:
                 self.removeTsprite(self.getTsprites[0])
                 # on tp le joueur
                 self.MAP.x, self.MAP.y= -470, 100
                 self.setState('PLAYING') # on change l'état de la partie en PLAYING
 
-        
+
 
         elif self.isState('PLAYING'):
         # on affiche des éléments de la partie quand elle débute
