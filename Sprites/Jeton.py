@@ -25,7 +25,10 @@ class Jeton():
         return self.x, self.y
     
     def Complete(self): # change le design du jeton en vert
-        self.x_texture, self.y_texture = self.x_texture+8, 40
+        if self.y_texture == 40:
+            self.x_texture, self.y_texture = self.x_texture+8, 40
+        if self.y_texture == 48:
+            self.x_texture, self.y_texture = self.x_texture+8, 48
 
     def isComplete(self):
         return self.x_texture == 8 and self.y_texture == 40
