@@ -75,6 +75,7 @@ class App:
         ''' retourne la liste de tous les textes à afficher'''
         return self.TEXT
     
+    
 # Gestion des déplacements
     def UP(self, bool):
         self.KEYS_PRESSED['UP'] = bool
@@ -108,16 +109,31 @@ class App:
     def update(self):
         '''update des éléments du jeu'''
         if self.isState('WAITING'):
-        # texte indicatif 
+        # texte indicatif space to interact 
             if len(self.getTsprites) == 0:
                 x = Image(pyxel.width/8.5, pyxel.height/1.7, 0, 16, 16, 207, 16, 1)
                 self.addTsprite(x)
+        #Screen information
+            text = Text(pyxel.width // 2 - 40, pyxel.height // 2 + 60, "Menu d'information(i)", 5)
+            self.addText(text)
+            if pyxel.btnp(pyxel.KEY_I): 
+                if self.INTERFACE==True:
+                    self.removeTsprite(self.getTsprites[-1])
+                    self.INTERFACE=False
+                else:
+                    menu = Image(95,100,0,0,168,64,64,3)
+                    self.addTsprite(menu)
+                    self.INTERFACE = True
+
+
         # détection de lancement de partie
             if pyxel.btn(pyxel.KEY_SPACE):
                 self.removeTsprite(self.getTsprites[0])
                 # on tp le joueur
                 self.MAP.x, self.MAP.y= -470, 100
                 self.setState('PLAYING') # on change l'état de la partie en PLAYING
+
+        
 
         elif self.isState('PLAYING'):
         # on affiche des éléments de la partie quand elle débute
