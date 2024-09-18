@@ -232,22 +232,22 @@ class App:
         #gestion des jetons à afficher
             if self.task == 0 and len(self.getSprites) == 1:
                 # on crée le premier jeton à l'entrée de l'EPSI
-                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'Bienvenue à l\'EPSI. Vous allez expérimenter la vie étudiante au travers de ces mini-jeux. Malheureusement, il s\'est passé un malheureux, le MyDil a été volé et vous allez devoir récupérer ces objets au travers de différentes quêtes', 0)   
+                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'Bienvenue à l\'EPSI. Vous allez expérimenter la vie étudiante au travers de ces mini-jeux. Malheureusement, le MyDil a été volé et vous allez devoir récupérer ces objets au travers de différentes quêtes', 0)   
                 self.addSprite(jeton_entree)    
             elif self.task == 1 and len(self.getSprites) == 2:
-                jeton_mydil = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 'text', 1)   
+                jeton_mydil = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 'Bienvenue au MyDil. C\'est ici que tu trouves tous les objets qui sont à la pointe de la technologie. Malheureusement on m\'a volé tous c\'est objet, s\'il vous plaît aidez-moi.', 1)   
                 self.addSprite(jeton_mydil) 
             elif self.task == 2 and len(self.getSprites) == 3:
-                jeton_reseau_cours = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 'text', 2)   
+                jeton_reseau_cours = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 'Bienvenue dans le cours de réseau. J\'ai effectivement l\'un des objets que tu cherches. Or j\'ai d\'abord besoin de toi pour rétablir le réseau. Relie les différents matériels pour remettre le réseau en place.', 2)   
                 self.addSprite(jeton_reseau_cours) 
             elif self.task == 3 and len(self.getSprites) == 4:
-                jeton_reseau_epreuve = Jeton(self.MAP.getPos()[0]-420, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 'text', 3)   
+                jeton_reseau_epreuve = Jeton(self.MAP.getPos()[0]-420, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 'Bienvenue au cours de WEB. Dans ce cours, tu devras te reconnaitre à mon compte, or à chaque fois j\'oublie mon mdp. Je me souviens juste que je l\'ai mis dans mon code. Si tu le retouve, je te donne l\'objet', 3)   
                 self.addSprite(jeton_reseau_epreuve) 
             elif self.task == 4 and len(self.getSprites) == 5:
-                jeton_pause = Jeton(self.MAP.getPos()[0]*2-157, self.MAP.getPos()[1]*2-34, 0, 0, 40, 8, 8, 'text', 4)   
+                jeton_pause = Jeton(self.MAP.getPos()[0]*2-157, self.MAP.getPos()[1]*2-34, 0, 0, 40, 8, 8, 'Salut et Bienvenue au cours de DEV. Si tu es la, c\'est que tu dois sûrement vouloir l\'objet. Je te le donne que si tu m\'aides pour ce petit programme sur lequel j\'ai du mal.', 4)   
                 self.addSprite(jeton_pause)
             elif self.task == 5 and len(self.getSprites) == 6:
-                jeton_web_cours = Jeton(self.MAP.getPos()[0]+400, self.MAP.getPos()[1]-160, 0, 0, 40, 8, 8, 'text', 5)   
+                jeton_web_cours = Jeton(self.MAP.getPos()[0]+400, self.MAP.getPos()[1]-160, 0, 0, 40, 8, 8, 'Bien le bonjour. Assez toi et prends place pour le cours de marketing. Si tu restes assez assidue, tu pourras récupérer le dernier objet.', 5)   
                 self.addSprite(jeton_web_cours)
             
 
