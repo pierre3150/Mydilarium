@@ -146,8 +146,20 @@ class App:
         elif self.isState('PLAYING'):
         # on affiche des éléments de la partie quand elle débute
             if len(self.getSprites) == 0:
-                player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8) # on crée un joueur
+                # on crée un joueur
+                player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8) 
                 self.addSprite(player)
+                # crée les objets manquant du MyDil
+                objet1 = Jeton(self.MAP.getPos[0], self.MAP.getPos[1], 0, 0, 48, 8, 8, "Casque virtuel ! Rapporte le vite au MyDil", 15)
+                objet2 = Jeton(self.MAP.getPos[0]+20, self.MAP.getPos[1], 0, 0, 48, 8, 8, "Carte Raspberry ! Rapporte le vite au MyDil", 16)
+                objet3 = Jeton(self.MAP.getPos[0]+40, self.MAP.getPos[1], 0, 0, 48, 8, 8, "Robot ! Rapporte le vite au MyDil", 17)
+                objet4 = Jeton(self.MAP.getPos[0]+60, self.MAP.getPos[1], 0, 0, 48, 8, 8, "Manette ! Rapporte le vite au MyDil", 18)
+                objet5 = Jeton(self.MAP.getPos[0]+80, self.MAP.getPos[1], 0, 0, 48, 8, 8, "Imprimante 3D ! Rapporte le vite au MyDil", 19)
+                self.addSprite(objet1)
+                self.addSprite(objet2)
+                self.addSprite(objet3)
+                self.addSprite(objet4)
+                self.addSprite(objet5)
 
         # déplacement 
             # UP
@@ -327,6 +339,48 @@ class App:
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
                             self.TIME = '18h - Game Over'
+
+                    # gestion objets Mydil cachés
+                        elif target_jeton.getNb() == 15:
+                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                            self.addTsprite(pancarte)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on complète la tâche
+                            self.CompleteTask(target_jeton, True)
+
+                        elif target_jeton.getNb() == 16:
+                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                            self.addTsprite(pancarte)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on complète la tâche
+                            self.CompleteTask(target_jeton, True)
+
+                        elif target_jeton.getNb() == 17:
+                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                            self.addTsprite(pancarte)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on complète la tâche
+                            self.CompleteTask(target_jeton, True)
+                        
+                        elif target_jeton.getNb() == 18:
+                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                            self.addTsprite(pancarte)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on complète la tâche
+                            self.CompleteTask(target_jeton, True)
+                        
+                        elif target_jeton.getNb() == 19:
+                            pancarte = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 192, 24, 8, 6)
+                            self.addTsprite(pancarte)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on complète la tâche
+                            self.CompleteTask(target_jeton, True)
+                        
 
                         for objtext in self.getText:
                             if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
