@@ -217,16 +217,20 @@ class App:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
                             # texte de la bulle
-                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))              
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))            
                             self.CompleteTask(target_jeton, False)
 
                         elif target_jeton.getNb() == 3:
-                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 8)
-                            self.addTsprite(bulle)
-                            # texte de la bulle
-                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            # on complète la tâche
-                            self.CompleteTask(target_jeton, True)
+                            # epreuve réseau
+                            pyxel.mouse(True) # on active la souris
+                            bg = Image(pyxel.width//2-63, 60, 2, 0, 0, 127, 143, 1.5)
+                            self.addTsprite(bg)
+                            self.addText(Text(pyxel.width//3.5, 58, 'installer Linux', 0))
+                            self.addText(Text(pyxel.width//3.7, 106, 'Connecter un Server', 0))
+                            self.addText(Text(pyxel.width//3.7, 154, 'Retablir le Reseau', 0))
+                            self.addText(Text(pyxel.width//3.7, 202, 'configurer Apache2', 0))
+                            
+                    
 
                         elif target_jeton.getNb() == 4:
                             bulle = Image(pyxel.width//2-8,pyxel.height*4/5, 2, 32, 200, 32, 32, 8)
@@ -452,6 +456,7 @@ class App:
                     for jeton in self.deleteJeton:
                         if jeton in self.getSprites:
                             self.removeSprite(jeton)
+                    pyxel.mouse(False) # on retire la souris
                     self.INTERFACE = False
 
         #gestion des jetons à afficher
