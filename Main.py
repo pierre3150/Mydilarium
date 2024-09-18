@@ -127,6 +127,7 @@ class App:
 
         # déplacement 
             # UP
+            target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:])
             if not self.INTERFACE:
                 if pyxel.btn(pyxel.KEY_Z) or pyxel.btn(pyxel.KEY_O):
                     self.UP(True)
@@ -149,7 +150,6 @@ class App:
                     self.RIGHT(False)       
         
             # Détection interaction
-                target_jeton = self.canInteract(self.getSprites[0], self.getSprites[1:])
                 if target_jeton in self.getSprites: # si on est assez proche d'un jeton
                     if len(self.getText)==0:
                         self.addText(Text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7))
@@ -279,7 +279,9 @@ class App:
                 # on retire le texte d'indication
                 # si on réappuye sur E on ferme le MENU
                 if pyxel.btnp(pyxel.KEY_E):
-                    self.removeText# on supprime les textes et la bulle
+                    for objtext in self.getText:
+                        if objtext.getText() in target_jeton.getText():
+                            self.removeText(objtext)# on supprime les textes et la bulle
                     self.removeTsprite(self.getTsprites[-1])
                     self.INTERFACE = False
 
