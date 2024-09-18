@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion</title>
+    <link rel="stylesheet" href="styleint.css">
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Empêche le formulaire de se soumettre normalement
+
+            // Récupère les valeurs des champs du formulaire
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Vérifie si le mot de passe est "AZERTY"
+            if (password === 'AZERTY') {
+                alert('Connexion réussie !');
+                window.close(); // Ferme la fenêtre du navigateur
+            } else {
+                alert('Identifiant ou mot de passe incorrect.');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <img src="logo_epsi_8b6f0271b8.png" alt="Logo" class="logo">
+    </div>
+    <div class="login-container">
+        <h1>Connexion</h1>
+        <form onsubmit="validateForm(event)">
+            <label for="username">Identifiant :</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Mot de passe :</label>
+            <!---le MDP est : AZERTY--->
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</body>
+
+</html>
