@@ -154,6 +154,11 @@ class App:
                         if target_jeton.getNb() == 0 or target_jeton.getNb() == 1:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
                             self.addTsprite(bulle)
+                            print(target_jeton.getText())
+                            if len(self.getText)>1:
+                                self.removeText(self.getText[-1]) # supprime le dernier text
+                            self.addText(Text(pyxel.width//15, pyxel.height//1.48, target_jeton.getText(), 7))
+
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
 
@@ -215,11 +220,10 @@ class App:
                 else:
                     if len(self.getText)>1:
                         self.removeText(self.getText[-1]) # supprime le dernier text
+                        
             else:
                 self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
                 # on retire le texte d'indication
-                if len(self.getText)>1:
-                    self.removeText(self.getText[-1]) # supprime le dernier text
                 # si on réappuye sur E on ferme le MENU
                 if pyxel.btnp(pyxel.KEY_E):
                     self.removeTsprite(self.getTsprites[-1])
@@ -228,7 +232,7 @@ class App:
         #gestion des jetons à afficher
             if self.task == 0 and len(self.getSprites) == 1:
                 # on crée le premier jeton à l'entrée de l'EPSI
-                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'text', 0)   
+                jeton_entree = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 'Bienvenue à l\'EPSI. Vous allez expérimenter la vie étudiante au travers de ces mini-jeux. Malheureusement, il s\'est passé un malheureux, le MyDil a été volé et vous allez devoir récupérer ces objets au travers de différentes quêtes', 0)   
                 self.addSprite(jeton_entree)    
             elif self.task == 1 and len(self.getSprites) == 2:
                 jeton_mydil = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 'text', 1)   
