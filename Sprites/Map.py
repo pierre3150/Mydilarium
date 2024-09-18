@@ -11,7 +11,7 @@ class Map():
         self.y_texture = y_texture
         self.width = width
         self.height = height
-        self.speed_scrolling = 3
+        self.speed_scrolling = 6
 
     def getPos(self):
         return self.x, self.y
