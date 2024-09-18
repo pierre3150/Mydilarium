@@ -7,7 +7,7 @@ from Sprites.Image import Image
 from Sprites.Jeton import Jeton
 from Sprites.Text import Text
 
-path = os.path.join("web", "index.html")
+
 
 class App:
 # constructeur
@@ -159,10 +159,6 @@ class App:
                         if target_jeton.getNb() == 0:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
                             
-                            # on ouvre une page web
-                            url = "file://" + os.path.abspath(path)
-                            webbrowser.open(url)
-                            
                             self.addTsprite(bulle)
                             print(target_jeton.getText())
                             if len(self.getText)>1:
@@ -177,6 +173,7 @@ class App:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
                             self.addTsprite(bulle)
                             # on complète la tâche
+                            
                             self.CompleteTask(target_jeton)
                             self.TIME = '8h30 - Cours de Réseau'
 
@@ -184,6 +181,12 @@ class App:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
                             self.addTsprite(bulle)
                             # on complète la tâche
+                            
+                            # on ouvre une page web
+                            path = os.path.join("web", "cours_res.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            
                             self.CompleteTask(target_jeton)
                             self.TIME = '9h30 - Cours de Réseau'
 
@@ -204,6 +207,12 @@ class App:
                         elif target_jeton.getNb() == 5:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
                             self.addTsprite(bulle)
+                            
+                            # on ouvre une page web
+                            path = os.path.join("web", "cours_web.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '11h30 - Cours Sécurité Web'
@@ -211,6 +220,12 @@ class App:
                         elif target_jeton.getNb() == 6:
                             bulle = Image(pyxel.width//2,pyxel.height*5/6, 2, 32, 200, 32, 32, 10)
                             self.addTsprite(bulle)
+                            
+                            # on ouvre une page web
+                            path = os.path.join("web", "test_web.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            
                             # on complète la tâche
                             self.CompleteTask(target_jeton)
                             self.TIME = '12h30 - Pause Dejeuner'

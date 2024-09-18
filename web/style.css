@@ -1,4 +1,57 @@
 body {
     background-color: black;
-    color: bisque;
+    margin: 0; /* Retirer les marges par défaut du body */
+    font-family: Arial, sans-serif; /* Ajouter une police de base pour le texte */
+    position: relative; /* Pour permettre le positionnement absolu du titre */
+}
+
+.titre {
+    color: aliceblue;
+    margin: 40px;
+    font-size: 36px; /* Taille du texte du titre */
+    font-weight: bold; /* Rendre le texte du titre en gras */
+    display: flex; /* Utiliser flexbox pour aligner le texte et l'image */
+    align-items: center; /* Aligner verticalement les éléments */
+    justify-content: space-between; /* Espacer le texte et l'image */
+}
+
+.titre img {
+    height: 100px; /* Ajuster la hauteur de l'image */
+    margin-left: 20px; /* Ajouter un espacement entre le texte et l'image */
+}
+
+.tableau {
+    color: black;
+    padding: 30px; /* Ajouter des espaces à l'intérieur du tableau */
+    background-color: white; /* Changer la couleur de fond en blanc */
+    border-radius: 8px; /* Ajouter des coins arrondis */
+    margin: 100px auto; /* Ajouter un espace autour du tableau et le centrer horizontalement */
+    width: 80%; /* Largeur du tableau */
+    max-width: 800px; /* Largeur maximale pour un meilleur affichage */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajouter une ombre légère pour un effet 3D */
+    text-align: center; /* Centrer le texte à l'intérieur du tableau */
+}
+
+h1 {
+    text-align: center;
+    color: #007BFF;
+}
+
+h2 {
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+strong {
+    color: #007BFF;
 }
