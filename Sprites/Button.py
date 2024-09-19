@@ -12,11 +12,14 @@ class Button():
         self.width = width
         self.height = height
         self.speed_scrolling = 6
-        self.nb = None
+        self.text = ''
         self.scale = scale
 
-    def set(self):
-        pass
+    def setText(self, text):
+        self.text = text
+    
+    def getText(self):
+        return self.text
 
     def getPos(self):
         return self.x, self.y

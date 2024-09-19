@@ -26,6 +26,7 @@ class App:
         self.deleteJeton = []
         self.INVENTORY = [] # liste pour stocker les objets du MyDil récupérés
         self.Buttons = []
+        self.caseCoche = []
         self.nbObjet = 0 # compteur d'objet trouvés
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256) # dimension de la fenêtre
@@ -253,8 +254,8 @@ class App:
                             self.addText(Text(pyxel.width//3.7, 106, 'Connecter un Server', 0))
                             self.addText(Text(pyxel.width//3.7, 154, 'Retablir le Reseau', 0))
                             self.addText(Text(pyxel.width//3.7, 202, 'configurer Apache2', 0))
-                            
-                    
+
+                            self.CompleteTask(target_jeton, True)
 
                         elif target_jeton.getNb() == 4:
                             bulle = Image(pyxel.width//2-8,pyxel.height*4/5, 2, 32, 200, 32, 32, 8)
@@ -305,6 +306,10 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on ouvre une page web
+                            path = os.path.join("web", "cours_dev.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
 
@@ -313,6 +318,10 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on ouvre une page web
+                            path = os.path.join("web", "test_dev.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
 
@@ -329,6 +338,10 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on ouvre une page web
+                            path = os.path.join("web", "cours_Market.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
                         
@@ -336,6 +349,10 @@ class App:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
                             # texte de la bulle
+                            # on ouvre une page web
+                            path = os.path.join("web", "test_mark.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
@@ -568,8 +585,12 @@ class App:
 
         # gestion epreuve reseau
             for btn in self.getButton:
-                if btn.getPos()[0] < pyxel.mouse_x < btn.getPos()[0]+24 and btn.getPos()[1] < pyxel.mouse_y < btn.getPos()[1]+24:
-                    print('hey')
+                if pyxel.btnp(pyxel.MOUSE_BUTTON_LEFT) and btn.getPos()[0] < pyxel.mouse_x < btn.getPos()[0]+24 and btn.getPos()[1] < pyxel.mouse_y < btn.getPos()[1]+24:  
+                    if len(self.caseCoche) < 4:
+                        if btn.getText() == '':
+                            self.caseCoche.append(btn)
+                            btn.setText(str(len(self.caseCoche)))
+                            self.addText(Text(btn.getPos()[0]+6, btn.getPos()[1]+6, btn.getText(), 0))
         
         # on update les sprites & les textes
             for s in self.getSprites:
@@ -596,10 +617,11 @@ class App:
             pyxel.blt(s.draw[0], s.draw[1], s.draw[2], s.draw[3], s.draw[4], s.draw[5], s.draw[6], self.cold_key, 0, s.draw[7])
         for ts in self.getTsprites:
             pyxel.blt(ts.draw[0], ts.draw[1], ts.draw[2], ts.draw[3], ts.draw[4], ts.draw[5], ts.draw[6], self.cold_key, 0, ts.draw[7])
-        for t in self.getText:
-            pyxel.text(t.draw[0], t.draw[1], t.draw[2], t.draw[3])
         for b in self.getButton:
             pyxel.blt(b.draw[0], b.draw[1], b.draw[2], b.draw[3], b.draw[4], b.draw[5], b.draw[6], self.cold_key, 0, b.draw[7])
+        for t in self.getText:
+            pyxel.text(t.draw[0], t.draw[1], t.draw[2], t.draw[3])
+
          # on affiche l'horloge
         if self.isState('PLAYING'):
             pyxel.text(pyxel.width*1/3,3, self.TIME, 7)
