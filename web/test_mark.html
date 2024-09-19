@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCM - Formation EPSI</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="stylemark.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <div class="titre">
+            QCM - Formation EPSI
+            <img class="logo" src="logo_epsi_8b6f0271b8.png" alt="Logo EPSI">
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h1>Questionnaire : Orientation et Création d'Entreprise</h1>
+
+        <section class="section form-section">
+            <h2>Question 1</h2>
+            <p>En première année vous avez le choix entre l’option SISR et SLAM qui peut mener sur un BTS SIO :</p>
+            <form id="form-question1">
+                <label>
+                    <input type="radio" name="choice1" value="SISR">
+                    SISR (Solutions d’infrastructure, systèmes et réseaux)
+                </label>
+                <label>
+                    <input type="radio" name="choice1" value="SLAM">
+                    SLAM (Solutions logicielles et applications métiers)
+                </label>
+            </form>
+        </section>
+
+        <section class="section form-section">
+            <h2>Question 2</h2>
+            <p>Dans la continuité du BTS SIO, le Bachelor informatique vous mène en 3ème année à la préparation d’une certification de niveau 6 (Bac+3) inscrite au RNCP avec différentes spécialisations qui s’offre à vous et également l’alternance :</p>
+            <form id="form-question2">
+                <label>
+                    <input type="checkbox" name="choice2" value="DEVOPS">
+                    DEVOPS - Fullstack : Développeur en Intelligence Artificielle et Data Science
+                </label>
+                <label>
+                    <input type="checkbox" name="choice2" value="SYSOPS">
+                    SYSOPS : Administrateur systèmes, réseaux et bases de données
+                </label>
+                <label>
+                    <input type="checkbox" name="choice2" value="Cybersécurité">
+                    Cybersécurité et informatique quantique
+                </label>
+                <label>
+                    <input type="checkbox" name="choice2" value="Big Data">
+                    Big data et informatique quantique
+                </label>
+            </form>
+        </section>
+
+        <section class="section form-section">
+            <h2>Question 3</h2>
+            <p>La Formation en informatique niveau BAC+5 :</p>
+            <form id="form-question3">
+                <label>
+                    <input type="radio" name="choice3" value="Development Track">
+                    Development Track
+                </label>
+                <label>
+                    <input type="radio" name="choice3" value="IA Expert Track">
+                    IA Expert Track
+                </label>
+                <label>
+                    <input type="radio" name="choice3" value="Network & Cybersecurity Track">
+                    Network & Cybersecurity Track
+                </label>
+                <label>
+                    <input type="radio" name="choice3" value="Cloud & Virtualization Track">
+                    Cloud & Virtualization Track
+                </label>
+            </form>
+        </section>
+
+        <section class="section">
+            <h2>Question de QCM</h2>
+            <p>Lors de la création de votre propre entreprise de marketing/informatique, quel est l'élément le plus important à définir en premier lieu ?</p>
+            <button class="button incorrect" onclick="checkAnswer(false)">A. Le budget publicitaire mensuel</button>
+            <button class="button correct" onclick="checkAnswer(true)">B. La niche de marché ou le segment cible</button>
+            <button class="button incorrect" onclick="checkAnswer(false)">C. Le nombre de salariés que vous allez embaucher</button>
+            <button class="button incorrect" onclick="checkAnswer(false)">D. Le nom de votre entreprise</button>
+
+            <p id="result-message" class="message"></p>
+        </section>
+    </div>
+
+    <script>
+        function checkAnswer(isCorrect) {
+            const messageElement = document.getElementById('result-message');
+            if (isCorrect) {
+                messageElement.textContent = 'Bonne réponse ! La page se fermera maintenant.';
+                messageElement.className = 'message correct';
+                setTimeout(() => {
+                    window.close();
+                }, 2000); // Fermeture après 2 secondes
+            } else {
+                messageElement.textContent = 'Mauvaise réponse. Essayez encore.';
+                messageElement.className = 'message incorrect';
+            }
+            messageElement.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
