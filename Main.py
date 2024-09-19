@@ -114,10 +114,8 @@ class App:
         for pos in posJetons:
             player_x, player_y = posPlayer.getPos()[0], posPlayer.getPos()[1]
             jeton_x, jeton_y = pos.getPos()[0], pos.getPos()[1]
-            if pos.getText() in 'map':
-                print(jeton_x-35, player_x+4, jeton_x+35)
-                if jeton_x-35 <= player_x+4 <= jeton_x+35 and jeton_y-35 <= player_y+4 <= jeton_y +35: 
-                    jeton = pos
+            if jeton_x-35 <= player_x+4 <= jeton_x+35 and jeton_y-35 <= player_y+4 <= jeton_y +35: 
+                jeton = pos
         return jeton
 # complète une tâche et passe à la suivante
     def CompleteTask(self, jeton, deleteAfterOpen):
@@ -374,18 +372,18 @@ class App:
                             self.deleteJeton.append(target_jeton)
                             
                         elif target_jeton.getNb() == 21:
-                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
-                            self.addTsprite(bulle)
-                            # texte de la bulle
-                            if self.nbObjet >=4:
-                                self.addText(Text(pyxel.width//8, pyxel.height//1.47, 'Bravo tu as trouve et ramene tous\nles objets du MyDil ! \n\nMerci pour ton aide :)', 7))
-                            else:
-                                self.addText(Text(pyxel.width//8, pyxel.height//1.47, 'Merci beaucoup !\n\nIl reste ' + str(5-(self.nbObjet+1)) + ' objets a trouver, je\n compte sur toi !', 7))
-                            # on vide l'inventaire
-                            self.INVENTORY.clear()
-                            self.nbObjet += 1
+                            map = Image(pyxel.width//2-20 ,pyxel.height//3, 0, 16, 32, 40, 24, 6)
+                            self.addTsprite(map)
+                            self.addText(Text(pyxel.width//6, pyxel.height//6+4, 'Reseau', 0))
+                            self.addText(Text(pyxel.width//2-10, pyxel.height//6+4, 'Marketing', 0))
+                            self.addText(Text(pyxel.width*4/5-5, pyxel.height//6+4, 'Web', 0))
+                            self.addText(Text(pyxel.width//6-6, pyxel.height//2+1, 'Conference', 0))
+                            self.addText(Text(pyxel.width//2-20, pyxel.height//2+9, 'Developpement', 0))
+                            self.addText(Text(pyxel.width*4/5-8, pyxel.height//2+9, 'Pause', 0))
+                            self.addText(Text(pyxel.width//2-4, pyxel.height//3+18, 'MyDiL', 0))
                             # on complète la tâche
-                            target_jeton.Complete()
+                            if not target_jeton.isComplete():
+                                target_jeton.Complete()
                             
                         self.INTERFACE = True
 
@@ -556,7 +554,7 @@ class App:
                 jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Merci beaucoup !\n\nIl reste des objets a trouver, je\n compte sur toi !', 20)
             
             if len(self.getSprites) == 6:# on crée une map au début
-                jeton = Jeton(self.MAP.getPos()[0]/2, self.MAP.getPos()[1]/2, 0, 0, 40, 8, 8, 3,'map', 21)
+                jeton = Jeton(self.MAP.getPos()[0]//3+28, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 3,'map', 21)
             
             
             # on affiche le jeton sur l'écran
