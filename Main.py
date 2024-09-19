@@ -29,7 +29,7 @@ class App:
         self.caseCoche = []
         self.nbObjet = 0 # compteur d'objet trouvés
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
-        pyxel.init(256, 256) # dimension de la fenêtre
+        pyxel.init(256, 256, 'Mydilarium') # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
         pyxel.run(self.update, self.draw) # execution du jeu
 
@@ -258,11 +258,12 @@ class App:
                             self.CompleteTask(target_jeton, True)
 
                         elif target_jeton.getNb() == 4:
-                            bulle = Image(pyxel.width//2-8,pyxel.height*4/5, 2, 32, 200, 32, 32, 8)
-                            self.addTsprite(bulle)
-                            # texte de la bulle
-                            self.addText(Text(pyxel.width//7, pyxel.height//1.47, target_jeton.getText(), 7))
-                            # on complète la tâche
+                            cible = Image(pyxel.width//2, 120, 0, 0, 56, 16, 16, 10)
+                            self.addTsprite(cible)
+                            fleche = Image(pyxel.width//4, pyxel.height*5/6, 0, 16, 56, 8, 8, 4)
+                            fleche2 = Image(pyxel.width//4-18, pyxel.height*5/6, 0, 16, 56, 8, 8, 4)
+                            self.addTsprite(fleche)
+                            self.addTsprite(fleche2)
                             self.CompleteTask(target_jeton, False)
                         
                         elif target_jeton.getNb() == 5:
