@@ -140,7 +140,7 @@ class App:
         #Screen information
             if pyxel.btnp(pyxel.KEY_I): 
                 if self.INTERFACE==True:
-
+                    self.TEXT.clear()
                     self.removeTsprite(self.getTsprites[-1])
                     # texte menu informations
                     text = Text(pyxel.width // 2 - 40, pyxel.height // 2 + 60, "Menu d'information(i)", 5)
