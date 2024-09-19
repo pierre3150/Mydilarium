@@ -142,6 +142,7 @@ class App:
         #Screen information
             if pyxel.btnp(pyxel.KEY_I): 
                 if self.INTERFACE==True:
+
                     self.removeTsprite(self.getTsprites[-1])
                     # texte menu informations
                     text = Text(pyxel.width // 2 - 40, pyxel.height // 2 + 60, "Menu d'information(i)", 5)
@@ -151,6 +152,7 @@ class App:
                     menu = Image(95,110,0,0,168,64,64,3)
                     self.addTsprite(menu)
                     self.removeText(self.getText[-1]) # on supprime le texte du menu d'informations
+                    self.addText(Text(pyxel.width//3 - 42, pyxel.height//2+30, "Bienvenue sur notre jeu de Workshop de\n\nseconde annee d\'etude, ce jeu a etait\n\n\ncreer par le groupe compose de Alix\n\n Paul et Pierre SN2 etudiant\n\n a l\'EPSI d\'Arras. ", 0))
                     self.INTERFACE = True
 
         # détection de lancement de partie
