@@ -23,7 +23,7 @@ class App:
         self.INTERFACE = False # si une interface est ouverte dans le jeu
         self.TIME = '8H - Debut de la journee '
         self.task = 0 # Tâche actuelle
-        self.deleteJeton = []
+        self.deleteJeton = [] #
         self.INVENTORY = [] # liste pour stocker les objets du MyDil récupérés
         self.Buttons = []
         self.caseCoche = []
