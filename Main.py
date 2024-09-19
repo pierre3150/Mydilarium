@@ -469,12 +469,12 @@ class App:
                             else:
                                 self.INTERFACE = False  # si on essaie de réinteragir avec un objet deja trouvé on n'ouvre pas de menu 
                         for objtext in self.getText:
-                            if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
+                            if objtext.getText() == "Appuyez sur 'E' pour interagir": # on supprime le texte d'indication
                                 self.removeText(objtext)# suppr le texte d'indication
 
                 else:
                     for objtext in self.getText:
-                        if objtext.getText() == "Press 'E' to interact": # on supprime le texte d'indication
+                        if objtext.getText() == "Appuyez sur 'E' pour interagir": # on supprime le texte d'indication
                             self.removeText(objtext)
                         
             else:
