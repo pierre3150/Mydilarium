@@ -5,6 +5,7 @@ from Sprites.Player import Player
 from Sprites.Map import Map
 from Sprites.Image import Image
 from Sprites.Jeton import Jeton
+from Sprites.Button import Button
 from Sprites.Text import Text
 
 
@@ -24,6 +25,7 @@ class App:
         self.task = 0 # Tâche actuelle
         self.deleteJeton = []
         self.INVENTORY = [] # liste pour stocker les objets du MyDil récupérés
+        self.Buttons = []
         self.nbObjet = 0 # compteur d'objet trouvés
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256) # dimension de la fenêtre
@@ -64,6 +66,19 @@ class App:
     def getSprites(self):
         ''' retourne la liste de tous les sprites à afficher'''
         return self.SPRITES
+
+# Gestion des Button
+    def addButton(self, button):
+        ''' ajouter un nouveau sprite à la liste des buttons à aficher '''
+        self.Buttons.append(button)
+
+    def removeButton(self, button):
+        '''supprimer un button pour ne plus l'afficher'''
+        self.Buttons.remove(button)
+    @property
+    def getButton(self):
+        ''' retourne la liste de tous les buttons à afficher'''
+        return self.Buttons
     
 # Gestion des Textes    
     def addText(self, text):
@@ -125,6 +140,7 @@ class App:
         #Screen information
             if pyxel.btnp(pyxel.KEY_I): 
                 if self.INTERFACE==True:
+
                     self.removeTsprite(self.getTsprites[-1])
                     # texte menu informations
                     text = Text(pyxel.width // 2 - 40, pyxel.height // 2 + 60, "Menu d'information(i)", 5)
@@ -134,6 +150,7 @@ class App:
                     menu = Image(95,110,0,0,168,64,64,3)
                     self.addTsprite(menu)
                     self.removeText(self.getText[-1]) # on supprime le texte du menu d'informations
+                    self.addText(Text(pyxel.width//3 - 42, pyxel.height//2+30, "Bienvenue sur notre jeu de Workshop de\n\nseconde annee d\'etude, ce jeu a etait\n\n\ncreer par le groupe compose de Alix\n\n Paul et Pierre SN2 etudiant\n\n a l\'EPSI d\'Arras. ", 0))
                     self.INTERFACE = True
 
         # détection de lancement de partie
@@ -226,6 +243,12 @@ class App:
                             pyxel.mouse(True) # on active la souris
                             bg = Image(pyxel.width//2-63, 60, 2, 0, 0, 127, 143, 1.5)
                             self.addTsprite(bg)
+                            # on ajoute les boutons
+                            self.addButton(Button(pyxel.width//2+65, 52, 2, 104, 16, 16, 16, 1.5)) 
+                            self.addButton(Button(pyxel.width//2+65, 100, 2, 104, 16, 16, 16, 1.5))
+                            self.addButton(Button(pyxel.width//2+65, 148, 2, 104, 16, 16, 16, 1.5))
+                            self.addButton(Button(pyxel.width//2+65, 196, 2, 104, 16, 16, 16, 1.5))
+
                             self.addText(Text(pyxel.width//3.5, 58, 'installer Linux', 0))
                             self.addText(Text(pyxel.width//3.7, 106, 'Connecter un Server', 0))
                             self.addText(Text(pyxel.width//3.7, 154, 'Retablir le Reseau', 0))
@@ -471,6 +494,7 @@ class App:
                         if objtext.getText() in target_jeton.getText() or objtext.getText() in 'Deposez votre objet au MyDil\navant de pouvoir recuperer\ncelui-ci.':
                     '''
                     self.getText.clear()
+                    self.Buttons.clear()
                     self.getTsprites.clear() # on supprime les images du menu
                     # on supprimer le jeton après consultation si nécessaire
                     for jeton in self.deleteJeton:
@@ -544,7 +568,10 @@ class App:
             if not inList:
                 self.addSprite(jeton) # si on a pas encore affiché le jeton d'interaction
 
-
+        # gestion epreuve reseau
+            for btn in self.getButton:
+                if btn.getPos()[0] < pyxel.mouse_x < btn.getPos()[0]+24 and btn.getPos()[1] < pyxel.mouse_y < btn.getPos()[1]+24:
+                    print('hey')
         
         # on update les sprites & les textes
             for s in self.getSprites:
@@ -573,7 +600,9 @@ class App:
             pyxel.blt(ts.draw[0], ts.draw[1], ts.draw[2], ts.draw[3], ts.draw[4], ts.draw[5], ts.draw[6], self.cold_key, 0, ts.draw[7])
         for t in self.getText:
             pyxel.text(t.draw[0], t.draw[1], t.draw[2], t.draw[3])
-        # on affiche l'horloge
+        for b in self.getButton:
+            pyxel.blt(b.draw[0], b.draw[1], b.draw[2], b.draw[3], b.draw[4], b.draw[5], b.draw[6], self.cold_key, 0, b.draw[7])
+         # on affiche l'horloge
         if self.isState('PLAYING'):
             pyxel.text(pyxel.width*1/3,3, self.TIME, 7)
         # on affiche le compteur d'objets
