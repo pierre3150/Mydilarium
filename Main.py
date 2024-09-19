@@ -114,8 +114,10 @@ class App:
         for pos in posJetons:
             player_x, player_y = posPlayer.getPos()[0], posPlayer.getPos()[1]
             jeton_x, jeton_y = pos.getPos()[0], pos.getPos()[1]
-            if jeton_x-35 <= player_x+4 <= jeton_x+35 and jeton_y-35 <= player_y+4 <= jeton_y +35: 
-                jeton = pos
+            if pos.getText() in 'map':
+                print(jeton_x-35, player_x+4, jeton_x+35)
+                if jeton_x-35 <= player_x+4 <= jeton_x+35 and jeton_y-35 <= player_y+4 <= jeton_y +35: 
+                    jeton = pos
         return jeton
 # complète une tâche et passe à la suivante
     def CompleteTask(self, jeton, deleteAfterOpen):
@@ -382,7 +384,6 @@ class App:
                             self.nbObjet += 1
                             # on complète la tâche
                             target_jeton.Complete()
-                            self.deleteJeton.append(target_jeton)
                             
                         self.INTERFACE = True
 
@@ -552,14 +553,13 @@ class App:
             if len(self.INVENTORY) != 0 and self.task > 1:
                 jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Merci beaucoup !\n\nIl reste des objets a trouver, je\n compte sur toi !', 20)
             
-            # on crée une map au début
+            if len(self.getSprites) == 6:# on crée une map au début
+                jeton = Jeton(self.MAP.getPos()[0]/2, self.MAP.getPos()[1]/2, 0, 0, 40, 8, 8, 3,'map', 21)
             
-            map1 = Jeton(self.MAP.getPos()[0]/2, self.MAP.getPos()[1]/2, 1, 0, 0, 238, 111, 0.3,'', 21)
-            self.addSprite(map1)
             
             # on affiche le jeton sur l'écran
             inList = False
-            for j in self.getSprites: 
+            for j in self.getSprites:
                 if isinstance(j, Jeton):
                     if j.getText() == jeton.getText():
                         inList = True
