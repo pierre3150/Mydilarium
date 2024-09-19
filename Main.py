@@ -378,6 +378,13 @@ class App:
                             # on complète la tâche
                             if not target_jeton.isComplete():
                                 target_jeton.Complete()
+                        elif target_jeton.getNb() == 22:
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
+                            self.addTsprite(bulle)
+                            # texte de la bulle
+                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            # on complète la tâche
+                            self.CompleteTask(target_jeton, False)
                             
                         self.INTERFACE = True
 
@@ -576,7 +583,10 @@ class App:
             
             if len(self.getSprites) == 6:# on crée une map au début
                 jeton = Jeton(self.MAP.getPos()[0]//3+28, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 3,'map', 21)
-            
+
+            if len(self.getSprites) == 7:# on crée un jeton referent au début
+                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1], 0, 0, 40, 8, 8, 3,'Text pour referent handicap', 22)
+        
             
             # on affiche le jeton sur l'écran
             inList = False
