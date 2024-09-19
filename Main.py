@@ -251,7 +251,7 @@ class App:
                             self.addButton(Button(pyxel.width//2+65, 196, 2, 104, 16, 16, 16, 1.5, '4'))
 
                             self.addText(Text(pyxel.width//3.5, 58, 'installer Linux', 0))
-                            self.addText(Text(pyxel.width//3.7, 106, 'Connecter un Server', 0))
+                            self.addText(Text(pyxel.width//3.7, 106, 'Connecter un Serveur', 0))
                             self.addText(Text(pyxel.width//3.7, 154, 'Retablir le Reseau', 0))
                             self.addText(Text(pyxel.width//3.7, 202, 'configurer Apache2', 0))
 
@@ -533,7 +533,7 @@ class App:
                 jeton = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 3,'Bienvenue au MyDil. C\'est ici que tu trouves\n\n tous les objets qui sont a la pointe de la\n\n technologie. Malheureusement tous\n\n ces objets, ce sont fait derober et cacher,\n\n s\'il te plait aide-moi a les trouver.', 1)   
             elif self.task == 2:
                 self.TIME = '8h30 - Cours de Reseau'
-                jeton = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 3,'Bienvenue dans le cours de reseau. \n\n\nDans ce cours tu vas apprendre a installer un\nserveur web afin de permettre aux autres\n intervenant d\'heberger leur cours au format web\nsur le reseau interne de l\'ecole', 2)   
+                jeton = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 3,'Bienvenue dans le cours de reseau. \n\n\nDans ce cours tu vas apprendre a installer un\nserveur web afin de permettre aux autres\n intervenant d\'heberger leur cours au format web\nsur le reseau interne de l\'ecole.\nAssure toi que le réseau est bien\nactif avant de configurer un serveur.', 2)   
             elif self.task == 3:
                 self.TIME = '9h30 - Cours de Reseau'
                 jeton = Jeton(self.MAP.getPos()[0]-420, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 3,'Configure et met en place un serveur web !\n\nAttention fait les choses dans le bon ordre si tu\nque tout fonctionne correctement.', 3)   
