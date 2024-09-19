@@ -24,6 +24,7 @@ class App:
         self.task = 0 # Tâche actuelle
         self.deleteJeton = []
         self.INVENTORY = [] # liste pour stocker les objets du MyDil récupérés
+        self.nbObjet = 0 # compteur d'objet trouvés
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256) # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
@@ -336,9 +337,13 @@ class App:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
                             # texte de la bulle
-                            self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            if self.nbObjet >=4:
+                                self.addText(Text(pyxel.width//8, pyxel.height//1.47, 'Bravo tu as trouve et ramene tous\nles objets du MyDil ! \n\nMerci pour ton aide :)', 7))
+                            else:
+                                self.addText(Text(pyxel.width//8, pyxel.height//1.47, 'Merci beaucoup !\n\nIl reste ' + str(5-(self.nbObjet+1)) + ' objets a trouver, je\n compte sur toi !', 7))
                             # on vide l'inventaire
                             self.INVENTORY.clear()
+                            self.nbObjet += 1
                             # on complète la tâche
                             target_jeton.Complete()
                             self.deleteJeton.append(target_jeton)
@@ -550,5 +555,9 @@ class App:
         # on affiche l'horloge
         if self.isState('PLAYING'):
             pyxel.text(pyxel.width*1/3,3, self.TIME, 7)
+        # on affiche le compteur d'objets
+        if self.task >=2:
+            pyxel.blt(pyxel.width-10,pyxel.height-10, 0, 8, 48, 8, 8)
+            pyxel.text(pyxel.width-23,pyxel.height-8, str(self.nbObjet) + '/5', 7)
 
 App()
