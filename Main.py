@@ -245,10 +245,10 @@ class App:
                             bg = Image(pyxel.width//2-63, 60, 2, 0, 0, 127, 143, 1.5)
                             self.addTsprite(bg)
                             # on ajoute les boutons
-                            self.addButton(Button(pyxel.width//2+65, 52, 2, 104, 16, 16, 16, 1.5)) 
-                            self.addButton(Button(pyxel.width//2+65, 100, 2, 104, 16, 16, 16, 1.5))
-                            self.addButton(Button(pyxel.width//2+65, 148, 2, 104, 16, 16, 16, 1.5))
-                            self.addButton(Button(pyxel.width//2+65, 196, 2, 104, 16, 16, 16, 1.5))
+                            self.addButton(Button(pyxel.width//2+65, 52, 2, 104, 16, 16, 16, 1.5, '3')) 
+                            self.addButton(Button(pyxel.width//2+65, 100, 2, 104, 16, 16, 16, 1.5, '2'))
+                            self.addButton(Button(pyxel.width//2+65, 148, 2, 104, 16, 16, 16, 1.5, '1'))
+                            self.addButton(Button(pyxel.width//2+65, 196, 2, 104, 16, 16, 16, 1.5, '4'))
 
                             self.addText(Text(pyxel.width//3.5, 58, 'installer Linux', 0))
                             self.addText(Text(pyxel.width//3.7, 106, 'Connecter un Server', 0))
@@ -591,7 +591,15 @@ class App:
                             self.caseCoche.append(btn)
                             btn.setText(str(len(self.caseCoche)))
                             self.addText(Text(btn.getPos()[0]+6, btn.getPos()[1]+6, btn.getText(), 0))
-        
+            # détecte la bonne réponse
+            if len(self.caseCoche) == 4 :
+                if self.getButton[0].getText() == self.getButton[0].getReponse() and self.getButton[1].getText() == self.getButton[1].getReponse() and self.getButton[2].getText() == self.getButton[2].getReponse() and self.getButton[3].getText() == self.getButton[3].getReponse():
+                    self.addText(Text(pyxel.width//3-15, pyxel.height*2/3+8, 'Bravo, tu as reussi le test !', 3))
+                    self.caseCoche.clear()
+                else:
+                    self.addText(Text(pyxel.width//3-15, pyxel.height*2/3+8, 'Tu n\'as pas reussi le test...', 8))
+                    self.caseCoche.clear()
+
         # on update les sprites & les textes
             for s in self.getSprites:
                 s.update(self.KEYS_PRESSED)
