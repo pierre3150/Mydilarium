@@ -11,7 +11,6 @@ class Button():
         self.y_texture = y_texture
         self.width = width
         self.height = height
-        self.speed_scrolling = 6
         self.reponse = reponse
         self.text = ''
         self.scale = scale
@@ -29,15 +28,7 @@ class Button():
         return self.x, self.y
         
     def update(self, keys):
-        # on fait défiler la map quand le joueur avance
-        if keys['UP'] and pyxel.pget(pyxel.width//2, pyxel.height//2-14)!=0:
-            self.y += self.speed_scrolling
-        elif keys['DOWN'] and pyxel.pget(pyxel.width//2, pyxel.height//2+10)!=0:
-            self.y -= self.speed_scrolling
-        elif keys['LEFT'] and pyxel.pget(pyxel.width//2-10, pyxel.height//2)!=0:
-            self.x += self.speed_scrolling  
-        elif keys['RIGHT'] and pyxel.pget(pyxel.width//2+14, pyxel.height//2)!=0:
-            self.x -= self.speed_scrolling 
+        pass
 
     @property
     def draw(self):

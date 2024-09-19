@@ -270,12 +270,6 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            
-                            # on ouvre une page web
-                            path = os.path.join("web", "cours_web.html")
-                            url = "file://" + os.path.abspath(path)
-                            webbrowser.open(url)
-                            
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
                         
@@ -284,11 +278,6 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            
-                            # on ouvre une page web
-                            path = os.path.join("web", "test_web.html")
-                            url = "file://" + os.path.abspath(path)
-                            webbrowser.open(url)
                             
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
@@ -306,10 +295,7 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            # on ouvre une page web
-                            path = os.path.join("web", "cours_dev.html")
-                            url = "file://" + os.path.abspath(path)
-                            webbrowser.open(url)
+                            
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
 
@@ -318,10 +304,7 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            # on ouvre une page web
-                            path = os.path.join("web", "test_dev.html")
-                            url = "file://" + os.path.abspath(path)
-                            webbrowser.open(url)
+                        
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
 
@@ -338,10 +321,7 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            # on ouvre une page web
-                            path = os.path.join("web", "cours_Market.html")
-                            url = "file://" + os.path.abspath(path)
-                            webbrowser.open(url)
+                            
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
                         
@@ -349,10 +329,7 @@ class App:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
                             # texte de la bulle
-                            # on ouvre une page web
-                            path = os.path.join("web", "test_mark.html")
-                            url = "file://" + os.path.abspath(path)
-                            webbrowser.open(url)
+                    
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
@@ -517,6 +494,33 @@ class App:
                         if jeton in self.getSprites:
                             self.removeSprite(jeton)
                     pyxel.mouse(False) # on retire la souris
+
+                    # gestion des sites
+                    if self.task == 6:
+                        path = os.path.join("web", "cours_web.html")
+                        url = "file://" + os.path.abspath(path)
+                        webbrowser.open(url)
+                    elif self.task == 7:
+                        path = os.path.join("web", "test_web.html")
+                        url = "file://" + os.path.abspath(path)
+                        webbrowser.open(url)
+                    elif self.task == 9:
+                        path = os.path.join("web", "cours_dev.html")
+                        url = "file://" + os.path.abspath(path)
+                        webbrowser.open(url)
+                    elif self.task == 10:
+                        path = os.path.join("web", "test_dev.html")
+                        url = "file://" + os.path.abspath(path)
+                        webbrowser.open(url)
+                    elif self.task == 12:
+                        path = os.path.join("web", "cours_Market.html")
+                        url = "file://" + os.path.abspath(path)
+                        webbrowser.open(url)
+                    elif self.task == 13:
+                        path = os.path.join("web", "test_mark.html")
+                        url = "file://" + os.path.abspath(path)
+                        webbrowser.open(url)
+
                     self.INTERFACE = False
 
         #gestion des jetons à afficher
