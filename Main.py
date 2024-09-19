@@ -210,7 +210,7 @@ class App:
             # Détection interaction
                 if target_jeton in self.getSprites: # si on est assez proche d'un jeton
                     if len(self.getText)==0:
-                        self.addText(Text(pyxel.width//3, pyxel.height//2+20, "Press 'E' to interact", 7))
+                        self.addText(Text(pyxel.width//3.5, pyxel.height//2+20, "Appuyez sur 'E' pour interagir", 7))
 
                     if pyxel.btnp(pyxel.KEY_E):
                     # gestion des MENUS jetons interactions
