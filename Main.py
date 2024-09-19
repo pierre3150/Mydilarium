@@ -585,7 +585,7 @@ class App:
                 jeton = Jeton(self.MAP.getPos()[0]//3+28, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 3,'map', 21)
 
             if len(self.getSprites) == 7:# on crée un jeton referent au début
-                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1], 0, 0, 40, 8, 8, 3,'Text pour referent handicap', 22)
+                jeton = Jeton(self.MAP.getPos()[0]*1.95, self.MAP.getPos()[1]*3, 0, 0, 40, 8, 8, 3,'Bonjour, je suis la referent handicap\n\n\n et a l\'EPSI on met tout en oeuvre pour\n\n\n que tout le monde se sante au mieux', 22)
         
             
             # on affiche le jeton sur l'écran
