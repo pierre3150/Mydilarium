@@ -167,7 +167,7 @@ class App:
                 # on crée un joueur
                 player = Player(pyxel.width//2-4, pyxel.height//2-4, 0, 8, 0, 8, 8, 4) 
                 self.addSprite(player)
-
+                
                 # crée les objets manquant du MyDil
                 objet1 = Jeton(self.MAP.getPos()[0]*2+36, self.MAP.getPos()[1]+34, 0, 0, 48, 8, 8, 2,'     Casque virtuel !\n\n\nRapporte le vite au MyDil', 15)
                 objet2 = Jeton(self.MAP.getPos()[0]//2-40, self.MAP.getPos()[1]*3+28, 0, 0, 48, 8, 8, 2,"    Carte Raspberry !\n\n\nRapporte le vite au MyDil", 16)
@@ -369,6 +369,21 @@ class App:
                             target_jeton.Complete()
                             self.deleteJeton.append(target_jeton)
                             
+                        elif target_jeton.getNb() == 21:
+                            bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
+                            self.addTsprite(bulle)
+                            # texte de la bulle
+                            if self.nbObjet >=4:
+                                self.addText(Text(pyxel.width//8, pyxel.height//1.47, 'Bravo tu as trouve et ramene tous\nles objets du MyDil ! \n\nMerci pour ton aide :)', 7))
+                            else:
+                                self.addText(Text(pyxel.width//8, pyxel.height//1.47, 'Merci beaucoup !\n\nIl reste ' + str(5-(self.nbObjet+1)) + ' objets a trouver, je\n compte sur toi !', 7))
+                            # on vide l'inventaire
+                            self.INVENTORY.clear()
+                            self.nbObjet += 1
+                            # on complète la tâche
+                            target_jeton.Complete()
+                            self.deleteJeton.append(target_jeton)
+                            
                         self.INTERFACE = True
 
                     # gestion objets Mydil cachés
@@ -536,6 +551,12 @@ class App:
             # jeton Mydil
             if len(self.INVENTORY) != 0 and self.task > 1:
                 jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Merci beaucoup !\n\nIl reste des objets a trouver, je\n compte sur toi !', 20)
+            
+            # on crée une map au début
+            
+            map1 = Jeton(self.MAP.getPos()[0]/2, self.MAP.getPos()[1]/2, 1, 0, 0, 238, 111, 0.3,'', 21)
+            self.addSprite(map1)
+            
             # on affiche le jeton sur l'écran
             inList = False
             for j in self.getSprites: 
