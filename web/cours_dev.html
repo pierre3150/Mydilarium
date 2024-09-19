@@ -4,17 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyDilarium</title>
+    <title>MyDilarium - Introduction à la POO</title>
     <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="titre">
-        MyDilarium
-        <img src="logo_epsi_8b6f0271b8.png" alt="Logo EPSI">
+    <div class="header">
+        <div class="titre">
+            MyDilarium
+            <img class="logo" src="logo_epsi_8b6f0271b8.png" alt="Logo EPSI">
+        </div>
+        
     </div>
+
     <div class="tableau">
-        <h2>       a écrire ici         </h2>
+        <h1>Cours de Développement - Programmation Orientée Objet (POO)</h1>
+
+        <section>
+            <h2>Concepts de Base</h2>
+            <p>La programmation orientée objet (POO) est une méthode de programmation qui permet de structurer le code en objets. Voici les concepts fondamentaux :</p>
+            <ul>
+                <li><strong>Objet</strong> : Une instance d'une classe qui regroupe des données et des méthodes.</li>
+                <li><strong>Classe</strong> : Un modèle définissant les attributs et comportements des objets.</li>
+                <li><strong>Attribut</strong> : Une variable stockant des informations spécifiques à un objet.</li>
+                <li><strong>Méthode</strong> : Une fonction liée à un objet, qui permet de manipuler ses attributs.</li>
+                <li><strong>Encapsulation</strong> : Mécanisme de protection des données d'un objet en les rendant accessibles uniquement par des méthodes définies.</li>
+                <li><strong>Héritage</strong> : Un mécanisme permettant à une classe de dériver d'une autre classe et de réutiliser son code.</li>
+                <li><strong>Polymorphisme</strong> : Capacité de différentes classes à redéfinir une même méthode.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Exemple de Classe en Python</h2>
+            <p>Voici un exemple simple d'une classe <strong>Voiture</strong> en Python :</p>
+            <pre>
+class Voiture:
+    def __init__(self, marque, vitesse):
+        self.marque = marque
+        self.vitesse = vitesse
+
+    def accelerer(self, ajout_vitesse):
+        self.vitesse += ajout_vitesse
+        print(f"La voiture {self.marque} roule à {self.vitesse} km/h")
+
+ma_voiture = Voiture("Peugeot", 100)
+ma_voiture.accelerer(20)
+            </pre>
+            <p>Dans cet exemple, la classe <strong>Voiture</strong> possède deux attributs (<em>marque</em> et <em>vitesse</em>) et une méthode <em>accelerer</em> pour augmenter la vitesse de la voiture.</p>
+        </section>
+
+        <section>
+            <h2>Évaluation Pratique</h2>
+            <p>Pour l'évaluation, vous allez créer un programme où un objet avance lorsqu'une touche est pressée.</p>
+            <ul>
+                <li>Créez une classe <strong>ObjetMobile</strong> avec des coordonnées <em>x</em> et <em>y</em>.</li>
+                <li>Implémentez une méthode <em>deplacer_droite</em> pour déplacer l'objet vers la droite.</li>
+                <li>Affichez l'objet sur un écran en utilisant une bibliothèque graphique comme <strong>pygame</strong>.</li>
+            </ul>
+        </section>
+
     </div>
 </body>
 

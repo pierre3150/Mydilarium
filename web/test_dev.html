@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Programmation Orientée Objet</title>
+    <link href="styledev.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>Test : Programmation Orientée Objet (POO)</h1>
+
+        <p class="instructions">Examinez les trois morceaux de code ci-dessous. Deux d'entre eux contiennent des
+            erreurs, et un seul est correct. Identifiez le code correct en cliquant sur le bouton approprié.</p>
+
+        <div class="code-block">
+            <h2>Code A</h2>
+            <pre>
+class Voiture:
+    def __init__(self, marque, vitesse):
+        marque = marque
+        vitesse = vitesse
+
+    def accelerer(self, ajout_vitesse):
+        vitesse += ajout_vitesse
+        print(f"La voiture {marque} roule à {vitesse} km/h")
+
+ma_voiture = Voiture("Peugeot", 100)
+ma_voiture.accelerer(20)
+            </pre>
+        </div>
+
+        <div class="code-block">
+            <h2>Code B</h2>
+            <pre>
+class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def faire_son(self):
+        print("Son de l'animal")
+
+class Chien(Animal):
+    def faire_son(self):
+        print("Aboyer")
+
+mon_chien = Animal("Rex")
+mon_chien.faire_son()
+            </pre>
+        </div>
+
+        <div class="code-block">
+            <h2>Code C</h2>
+            <pre>
+class Voiture:
+    def __init__(self, marque, vitesse):
+        self.marque = marque
+        self.vitesse = vitesse
+
+    def accelerer(self, ajout_vitesse):
+        self.vitesse += ajout_vitesse
+        print(f"La voiture {self.marque} roule à {self.vitesse} km/h")
+
+ma_voiture = Voiture("Peugeot", 100)
+ma_voiture.accelerer(20)
+            </pre>
+        </div>
+
+        <p class="question">Choisissez le code correct :</p>
+        <button class="button incorrect" onclick="checkAnswer(false)">Code A</button>
+        <button class="button incorrect" onclick="checkAnswer(false)">Code B</button>
+        <button class="button correct" onclick="checkAnswer(true)">Code C</button>
+
+        <p id="result-message" class="message"></p>
+    </div>
+
+    <script>
+        function checkAnswer(isCorrect) {
+            const messageElement = document.getElementById('result-message');
+            if (isCorrect) {
+                messageElement.textContent = 'Bonne réponse ! La page se fermera maintenant.';
+                messageElement.className = 'message correct';
+                setTimeout(() => {
+                    window.close();
+                }, 2000); // Fermeture après 2 secondes
+            } else {
+                messageElement.textContent = 'Mauvaise réponse. Essayez encore.';
+                messageElement.className = 'message incorrect';
+            }
+            messageElement.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
