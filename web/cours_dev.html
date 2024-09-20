@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyDilarium - Introduction à la POO</title>
     <link href="style.css" rel="stylesheet">
+    <link href="stylemark.css" rel="stylesheet">
 </head>
 
 <body>
@@ -62,8 +63,22 @@ ma_voiture.accelerer(20)
                 <li>Affichez l'objet sur un écran en utilisant une bibliothèque graphique comme <strong>pygame</strong>.</li>
             </ul>
         </section>
-
+        <section class="section">
+            <button class="button correct" onclick="checkAnswer(true)">Revenir au jeu</button>
+        </section>
     </div>
+
+    <script>
+        function checkAnswer(isCorrect) {
+            const messageElement = document.getElementById('result-message');
+            if (isCorrect) {
+                messageElement.className = 'message correct';
+                window.close();
+
+            } 
+            messageElement.style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>

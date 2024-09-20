@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyDilarium</title>
     <link href="style.css" rel="stylesheet">
+    <link href="stylemark.css" rel="stylesheet">
 </head>
 
 <body>
@@ -62,7 +63,21 @@
                 <li><strong>Ouvrir le DEV TOOLS</strong> appuiler sur Ctrl+Shift+C pour afficher le dev tools</li>
             </ul>
         </section>
+        <section class="section">
+            <button class="button correct" onclick="checkAnswer(true)">Revenir au jeu</button>
+        </section>
     </div>
+    <script>
+        function checkAnswer(isCorrect) {
+            const messageElement = document.getElementById('result-message');
+            if (isCorrect) {
+                messageElement.textContent = 'Bonne réponse ! La page se fermera maintenant.';
+                messageElement.className = 'message correct';
+                window.close();
+            } 
+            messageElement.style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>

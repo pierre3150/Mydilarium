@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyDilarium - Options après EPSI</title>
     <link href="style.css" rel="stylesheet">
+    <link href="stylemark.css" rel="stylesheet">
 </head>
 
 <body>
@@ -64,7 +65,21 @@
                 marketing efficaces et concentrer vos efforts sur un public précis.</p>
             <p>Cela permet d'optimiser vos ressources et d'augmenter vos chances de succès sur le marché.</p>
         </section>
+        <section class="section">
+            <button class="button correct" onclick="checkAnswer(true)">Revenir au jeu</button>
+        </section>
     </div>
+    <script>
+        function checkAnswer(isCorrect) {
+            const messageElement = document.getElementById('result-message');
+            if (isCorrect) {
+                messageElement.textContent = 'Bonne réponse ! La page se fermera maintenant.';
+                messageElement.className = 'message correct';
+                window.close();
+            } 
+            messageElement.style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>

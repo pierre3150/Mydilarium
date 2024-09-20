@@ -28,6 +28,7 @@ class App:
         self.Buttons = []
         self.caseCoche = []
         self.nbObjet = 0 # compteur d'objet trouvés
+        self.isWeb = False # detecte si on est deja allé visiter une page web
         self.KEYS_PRESSED = {'UP':False, 'DOWN':False, 'LEFT':False, 'RIGHT':False}
         pyxel.init(256, 256, 'Mydilarium') # dimension de la fenêtre
         pyxel.load('res.pyxres') # importation du fichier des textures
@@ -271,6 +272,7 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
+                            self.isWeb = False
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
                         
@@ -279,7 +281,7 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            
+                            self.isWeb = False
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
 
@@ -296,7 +298,7 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            
+                            self.isWeb = False
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
 
@@ -305,7 +307,7 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                        
+                            self.isWeb = False
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
 
@@ -322,7 +324,7 @@ class App:
                             self.addTsprite(bulle)
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
-                            
+                            self.isWeb = False
                             # on complète la tâche
                             self.CompleteTask(target_jeton, False)
                         
@@ -330,7 +332,7 @@ class App:
                             bulle = Image(pyxel.width//2-10,pyxel.height*4/5, 2, 32, 200, 32, 32, 7)
                             self.addTsprite(bulle)
                             # texte de la bulle
-                    
+                            self.isWeb = False
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
                             self.CompleteTask(target_jeton, True)
@@ -385,7 +387,8 @@ class App:
                             # texte de la bulle
                             self.addText(Text(pyxel.width//8, pyxel.height//1.47, target_jeton.getText(), 7))
                             # on complète la tâche
-                            self.CompleteTask(target_jeton, False)
+                            if not target_jeton.isComplete():
+                                target_jeton.Complete()
                             
                         self.INTERFACE = True
 
@@ -504,30 +507,37 @@ class App:
                     pyxel.mouse(False) # on retire la souris
 
                     # gestion des sites
-                    if self.task == 6:
-                        path = os.path.join("web", "cours_web.html")
-                        url = "file://" + os.path.abspath(path)
-                        webbrowser.open(url)
-                    elif self.task == 7:
-                        path = os.path.join("web", "test_web.html")
-                        url = "file://" + os.path.abspath(path)
-                        webbrowser.open(url)
-                    elif self.task == 9:
-                        path = os.path.join("web", "cours_dev.html")
-                        url = "file://" + os.path.abspath(path)
-                        webbrowser.open(url)
-                    elif self.task == 10:
-                        path = os.path.join("web", "test_dev.html")
-                        url = "file://" + os.path.abspath(path)
-                        webbrowser.open(url)
-                    elif self.task == 12:
-                        path = os.path.join("web", "cours_Market.html")
-                        url = "file://" + os.path.abspath(path)
-                        webbrowser.open(url)
-                    elif self.task == 13:
-                        path = os.path.join("web", "test_mark.html")
-                        url = "file://" + os.path.abspath(path)
-                        webbrowser.open(url)
+                    if not self.isWeb:
+                        if self.task == 6:
+                            path = os.path.join("web", "cours_web.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            self.isWeb = True
+                        elif self.task == 7:
+                            path = os.path.join("web", "test_web.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            self.isWeb = True
+                        elif self.task == 9:
+                            path = os.path.join("web", "cours_dev.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            self.isWeb = True
+                        elif self.task == 10:
+                            path = os.path.join("web", "test_dev.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            self.isWeb = True
+                        elif self.task == 12:
+                            path = os.path.join("web", "cours_Market.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            self.isWeb = True
+                        elif self.task == 13:
+                            path = os.path.join("web", "test_mark.html")
+                            url = "file://" + os.path.abspath(path)
+                            webbrowser.open(url)
+                            self.isWeb = True
 
                     self.INTERFACE = False
 
@@ -535,10 +545,10 @@ class App:
             jeton = None
             if self.task == 0:
                 # on crée le premier jeton à l'entrée de l'EPSI
-                jeton = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 3,'Bienvenue à l\'EPSI ! Venez decouvrir la vie\n etudiante sur notre campus le temps d\'une\n journee.\n\n\nCommmence par rendre visite au coach Mydil\npresent au centre du campus !', 0)       
+                jeton = Jeton(0, pyxel.height//2, 0, 0, 40, 8, 8, 3,'Bienvenue a l\'EPSI ! Venez decouvrir la vie\n etudiante sur notre campus le temps d\'une\n journee.\n\n\nCommmence par rendre visite au coach Mydil\npresent au centre du campus !', 0)       
             elif self.task == 1:
                 self.TIME = '8h15 - Se rendre au MyDil'
-                jeton = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 3,'Bienvenue au MyDil. C\'est ici que tu trouves\n\n tous les objets qui sont a la pointe de la\n\n technologie. Malheureusement tous\n\n ces objets, ce sont fait derober et cacher,\n\n s\'il te plait aide-moi a les trouver.', 1)   
+                jeton = Jeton(self.MAP.getPos()[0]-50, self.MAP.getPos()[1]+36, 0, 0, 40, 8, 8, 3,'Bienvenue au MyDil. C\'est ici que tu trouves\n\n tous les objets qui sont a la pointe de la\n\n technologie. Malheureusement tous\n\n ces objets, ce sont fait derobet. Durant ta \n\njournee si tu en trouves rapporte les moi ;)', 1)   
             elif self.task == 2:
                 self.TIME = '8h30 - Cours de Reseau'
                 jeton = Jeton(self.MAP.getPos()[0]-288, self.MAP.getPos()[1]-112, 0, 0, 40, 8, 8, 3,'Bienvenue dans le cours de reseau. \n\n\nDans ce cours tu vas apprendre a installer un\nserveur web afin de permettre aux autres\n intervenant d\'heberger leur cours au format web\nsur le reseau interne de l\'ecole.\nAssure toi que le réseau est bien\nactif avant de configurer un serveur.', 2)   
@@ -559,16 +569,16 @@ class App:
                 jeton = Jeton(self.MAP.getPos()[0]+332, self.MAP.getPos()[1]*2+50, 0, 0, 40, 8, 8, 3,'**Bruit de Micro-ondes***', 7)   
             elif self.task == 8:
                 self.TIME = '13h30 - Cours Programmation'
-                jeton = Jeton(self.MAP.getPos()[0]-150, self.MAP.getPos()[1]//10+100, 0, 0, 40, 8, 8, 3,'Assieds-toi!\n\n\n Vous etes ici dans le cours de Programmation.\n\n\n Je vous invite à prendre des notes des\n\n\n  commandes à retenir ',8)   
+                jeton = Jeton(self.MAP.getPos()[0]-150, self.MAP.getPos()[1]//10+100, 0, 0, 40, 8, 8, 3,'Assieds-toi!\n\n\n Vous etes ici dans le cours de Programmation.\n\n\n Je vous invite a prendre des notes des\n\n\n  commandes à retenir ',8)   
             elif self.task == 9:
                 self.TIME = '14h30 - Cours Programmation'
-                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]//10+172, 0, 0, 40, 8, 8, 3,'L\'epreuve est tres simple,\n\n\n fait avancer le robot en trouvant le code correct :) ', 9)   
+                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]//10+172, 0, 0, 40, 8, 8, 3,'L\'epreuve est tres simple,\n\n\n fait avancer le robot en trouvant le code \ncorrect :) ', 9)   
             elif self.task == 10:
                 self.TIME = '15h15 - Pause dans le couloir'
                 jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]-36, 0, 0, 40, 8, 8, 3,'Blablablablabla', 10)   
             elif self.task == 11:
                 self.TIME = '15h30 - Cours Marketing/Communication'
-                jeton = Jeton(self.MAP.getPos()[0]//2-50, self.MAP.getPos()[1]//3-30, 0, 0, 40, 8, 8, 3,'Bonjour,Vous etes ici en cours de Marketing.\n\n\n Nous allons voir les différents\n\n\n  types d\'entreprises.', 11)   
+                jeton = Jeton(self.MAP.getPos()[0]//2-50, self.MAP.getPos()[1]//3-30, 0, 0, 40, 8, 8, 3,'Bonjour, vous etes ici en cours de Marketing.\n\n\n Nous allons voir les differents\n\n\n  types d\'entreprises.', 11)   
             elif self.task == 12:
                 self.TIME = '16h30 - Cours Marketing/Communication'
                 jeton = Jeton(self.MAP.getPos()[0]*2-50, self.MAP.getPos()[1]//3+10, 0, 0, 40, 8, 8, 3,'Voici un petit questionnaire,\n\n\n  afin de bien choisir son cursus\n\n\n  au sein de l\'etablissement.', 12)   
@@ -576,19 +586,15 @@ class App:
                 self.TIME = '17h30 - Remise des Diplomes'
                 jeton = Jeton(self.MAP.getPos()[0]-360, self.MAP.getPos()[1]+200, 0, 0, 40, 8, 8, 3,'Prenez place, Expert IT.\n\n\n Vous avez tous obtenu votre diplome\n\n\n  avec franc succes!\n\n\n  Felicitation!!!', 13)   
             else:
-                self.TIME = '18h - Game Over'
+                self.TIME = '18h - Sortir de l\'EPSI'
                 jeton = Jeton(self.MAP.getPos()[0]*2+70, self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Vous etes tout a fait libre desormais\n\n\n  pour creer votre propre  entreprise.\n\n\n  avec toutes les competences acquises\n\n\n  pendant votre parcours', 14)   
-            # jeton Mydil
-            if len(self.INVENTORY) != 0 and self.task > 1:
-                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Merci beaucoup !\n\nIl reste des objets a trouver, je\n compte sur toi !', 20)
-            
+                
             if len(self.getSprites) == 6:# on crée une map au début
                 jeton = Jeton(self.MAP.getPos()[0]//3+28, self.MAP.getPos()[1], 0, 0, 40, 8, 8, 3,'map', 21)
 
             if len(self.getSprites) == 7:# on crée un jeton referent au début
-                jeton = Jeton(self.MAP.getPos()[0]*1.95, self.MAP.getPos()[1]*3, 0, 0, 40, 8, 8, 3,'Bonjour, je suis la referent handicap\n\n\n et a l\'EPSI on met tout en oeuvre pour\n\n\n que tout le monde se sante au mieux', 22)
+                jeton = Jeton(self.MAP.getPos()[0]*1.95, self.MAP.getPos()[1]*3, 0, 0, 40, 8, 8, 3,'Bonjour, je suis la referente handicap\n\n\n et a l\'EPSI on met tout en oeuvre pour\n\n\n que tout le monde se sente au mieux', 22)
         
-            
             # on affiche le jeton sur l'écran
             inList = False
             for j in self.getSprites:
@@ -597,6 +603,18 @@ class App:
                         inList = True
             if not inList:
                 self.addSprite(jeton) # si on a pas encore affiché le jeton d'interaction
+            
+            # gestion apparition jeton Mydil
+            if len(self.INVENTORY) != 0 and self.task >1:
+                jeton = Jeton(self.MAP.getPos()[0], self.MAP.getPos()[1]+28, 0, 0, 40, 8, 8, 3,'Merci beaucoup !\n\nIl reste des objets a trouver, je\n compte sur toi !', 20)
+                # on affiche le jeton dans le Mydil
+                inList = False
+                for j in self.getSprites:
+                    if isinstance(j, Jeton):
+                        if j.getText() == jeton.getText():
+                            inList = True
+                if not inList:
+                    self.addSprite(jeton) # si on a pas encore affiché le jeton d'interaction
 
         # gestion epreuve reseau
             for btn in self.getButton:
@@ -625,7 +643,7 @@ class App:
             self.MAP.update(self.KEYS_PRESSED)
 
         elif self.isState('FINISH'):
-            pass
+            pyxel.quit()
 
     def draw(self):
         pyxel.cls(0) # background noir
