@@ -72,10 +72,13 @@ ma_voiture.accelerer(20)
         function checkAnswer(isCorrect) {
             const messageElement = document.getElementById('result-message');
             if (isCorrect) {
-                messageElement.className = 'message correct';
-                window.close();
-
-            } 
+                setTimeout(() => {
+                    window.close();
+                }, 0); 
+            } else {
+                messageElement.textContent = 'Mauvaise réponse. Essayez encore.';
+                messageElement.className = 'message incorrect';
+            }
             messageElement.style.display = 'block';
         }
     </script>
